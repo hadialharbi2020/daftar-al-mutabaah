@@ -1,1 +1,115 @@
-<h1>سياسة الخصوصية</h1><p>النص هنا...</p>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>سياسة الخصوصية - دفتر المتابعة</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 40px auto;
+        max-width: 900px;
+        line-height: 1.8;
+        color: #222;
+        background-color: #f9f9f9;
+        padding: 20px;
+      }
+      h1,
+      h2 {
+        color: #042867;
+      }
+      .section {
+        background: #fff;
+        padding: 20px 25px;
+        margin-bottom: 20px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+      p {
+        margin: 12px 0;
+      }
+      a {
+        color: #0d6efd;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .lang-toggle {
+        text-align: left;
+        margin-bottom: 20px;
+      }
+      .lang-toggle button {
+        padding: 6px 12px;
+        margin-left: 5px;
+        border: none;
+        border-radius: 6px;
+        background-color: #042867;
+        color: #fff;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="lang-toggle">
+      <button onclick="switchLang('ar')">العربية</button>
+      <button onclick="switchLang('en')">English</button>
+    </div>
+
+    <!-- Arabic Version -->
+    <div id="ar" class="section">
+      <h1>سياسة الخصوصية</h1>
+      <p>
+        نحن نلتزم بحماية خصوصيتك. تطبيق <strong>دفتر المتابعة</strong> لا يجمع
+        أي بيانات شخصية دون موافقتك.
+      </p>
+      <p>
+        قد نقوم بجمع معلومات أساسية مثل الاسم والصورة فقط لغرض إدارة الفصول داخل
+        التطبيق.
+      </p>
+      <p>لا تتم مشاركة بياناتك مع أي طرف ثالث.</p>
+      <p>يتم تخزين البيانات على iCloud بشكل آمن عند تفعيل المزامنة.</p>
+      <p>
+        يمكنك حذف بياناتك في أي وقت عبر حذف التطبيق أو استخدام ميزة النسخ
+        الاحتياطي والاستيراد.
+      </p>
+      <p>
+        للاستفسارات، يمكن التواصل عبر البريد:
+        <a href="mailto:youremail@example.com">youremail@example.com</a>
+      </p>
+    </div>
+
+    <!-- English Version -->
+    <div id="en" class="section" style="display: none" dir="ltr" lang="en">
+      <h1>Privacy Policy</h1>
+      <p>
+        We are committed to protecting your privacy.
+        <strong>Daftar Al-Mutabaah</strong> app does not collect any personal
+        data without your consent.
+      </p>
+      <p>
+        We may collect basic information such as names and photos solely for
+        managing classrooms within the app.
+      </p>
+      <p>Your data is never shared with third parties.</p>
+      <p>Data is securely stored in iCloud when synchronization is enabled.</p>
+      <p>
+        You can delete your data at any time by deleting the app or using the
+        backup/export feature.
+      </p>
+      <p>
+        For inquiries, please contact us at:
+        <a href="mailto:youremail@example.com">youremail@example.com</a>
+      </p>
+    </div>
+
+    <script>
+      function switchLang(lang) {
+        document.getElementById("ar").style.display =
+          lang === "ar" ? "block" : "none";
+        document.getElementById("en").style.display =
+          lang === "en" ? "block" : "none";
+      }
+    </script>
+  </body>
+</html>
