@@ -4,112 +4,151 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>سياسة الخصوصية - دفتر المتابعة</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Tajawal Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+
     <style>
       body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        margin: 40px auto;
-        max-width: 900px;
-        line-height: 1.8;
-        color: #222;
-        background-color: #f9f9f9;
-        padding: 20px;
-      }
-      h1,
-      h2 {
-        color: #042867;
-      }
-      .section {
-        background: #fff;
-        padding: 20px 25px;
-        margin-bottom: 20px;
-        border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-      }
-      p {
-        margin: 12px 0;
-      }
-      a {
-        color: #0d6efd;
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-      .lang-toggle {
-        text-align: left;
-        margin-bottom: 20px;
-      }
-      .lang-toggle button {
-        padding: 6px 12px;
-        margin-left: 5px;
-        border: none;
-        border-radius: 6px;
-        background-color: #042867;
-        color: #fff;
-        cursor: pointer;
+        font-family: "Tajawal", sans-serif;
       }
     </style>
   </head>
-  <body>
-    <div class="lang-toggle">
-      <button onclick="switchLang('ar')">العربية</button>
-      <button onclick="switchLang('en')">English</button>
-    </div>
+  <body
+    class="bg-gradient-to-br from-blue-50 via-white to-indigo-50 min-h-screen flex flex-col"
+  >
+    <!-- الهيدر -->
+    <header
+      class="bg-gradient-to-r from-blue-700 to-indigo-800 text-white py-10 shadow-lg text-center"
+    >
+      <h1 class="text-3xl md:text-4xl font-extrabold">🔒 سياسة الخصوصية</h1>
+      <p class="opacity-80 mt-2">كيف نحمي بياناتك ونضمن أمانك داخل التطبيق</p>
+    </header>
 
-    <!-- Arabic Version -->
-    <div id="ar" class="section">
-      <h1>سياسة الخصوصية</h1>
-      <p>
-        نحن نلتزم بحماية خصوصيتك. تطبيق <strong>دفتر المتابعة</strong> لا يجمع
-        أي بيانات شخصية دون موافقتك.
-      </p>
-      <p>
-        قد نقوم بجمع معلومات أساسية مثل الاسم والصورة فقط لغرض إدارة الفصول داخل
-        التطبيق.
-      </p>
-      <p>لا تتم مشاركة بياناتك مع أي طرف ثالث.</p>
-      <p>يتم تخزين البيانات على iCloud بشكل آمن عند تفعيل المزامنة.</p>
-      <p>
-        يمكنك حذف بياناتك في أي وقت عبر حذف التطبيق أو استخدام ميزة النسخ
-        الاحتياطي والاستيراد.
-      </p>
-      <p>
-        للاستفسارات، يمكن التواصل عبر البريد:
-        <a href="mailto:hadionline1994@gmail.com">hadionline1994@gmail.com</a>
-      </p>
-    </div>
+    <!-- المحتوى -->
+    <main class="container mx-auto px-6 py-12 flex-1" x-data="{lang: 'ar'}">
+      <!-- أزرار اللغة -->
+      <div class="flex justify-center gap-4 mb-8">
+        <button
+          @click="lang = 'ar'"
+          class="px-4 py-2 rounded-lg text-white bg-blue-700 hover:bg-blue-800 transition"
+          :class="{'opacity-50': lang !== 'ar'}"
+        >
+          العربية
+        </button>
+        <button
+          @click="lang = 'en'"
+          class="px-4 py-2 rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition"
+          :class="{'opacity-50': lang !== 'en'}"
+        >
+          English
+        </button>
+      </div>
 
-    <!-- English Version -->
-    <div id="en" class="section" style="display: none" dir="ltr" lang="en">
-      <h1>Privacy Policy</h1>
-      <p>
-        We are committed to protecting your privacy.
-        <strong>Daftar Al-Mutabaah</strong> app does not collect any personal
-        data without your consent.
-      </p>
-      <p>
-        We may collect basic information such as names and photos solely for
-        managing classrooms within the app.
-      </p>
-      <p>Your data is never shared with third parties.</p>
-      <p>Data is securely stored in iCloud when synchronization is enabled.</p>
-      <p>
-        You can delete your data at any time by deleting the app or using the
-        backup/export feature.
-      </p>
-      <p>
-        For inquiries, please contact us at:
-        <a href="mailto:hadionline1994@gmail.com">hadionline1994@gmail.com</a>
-      </p>
-    </div>
+      <!-- النسخة العربية -->
+      <div x-show="lang === 'ar'" class="space-y-6 text-right">
+        <div class="bg-white rounded-2xl shadow-lg p-6">
+          <p>
+            نحن نلتزم بحماية خصوصيتك. تطبيق <strong>دفتر المتابعة</strong> لا
+            يجمع أي بيانات شخصية دون موافقتك.
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg p-6">
+          <p>
+            قد نقوم بجمع معلومات أساسية مثل الاسم والصورة فقط لغرض إدارة الفصول
+            داخل التطبيق.
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg p-6">
+          <p>لا تتم مشاركة بياناتك مع أي طرف ثالث.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg p-6">
+          <p>يتم تخزين البيانات على iCloud بشكل آمن عند تفعيل المزامنة.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg p-6">
+          <p>
+            يمكنك حذف بياناتك في أي وقت عبر حذف التطبيق أو استخدام ميزة النسخ
+            الاحتياطي والاستيراد.
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg p-6">
+          <p>
+            للاستفسارات، يمكن التواصل عبر البريد:
+            <a
+              href="mailto:hadionline1994@gmail.com"
+              class="text-blue-600 underline"
+              >hadionline1994@gmail.com</a
+            >
+          </p>
+        </div>
+      </div>
 
-    <script>
-      function switchLang(lang) {
-        document.getElementById("ar").style.display =
-          lang === "ar" ? "block" : "none";
-        document.getElementById("en").style.display =
-          lang === "en" ? "block" : "none";
-      }
-    </script>
+      <!-- النسخة الإنجليزية -->
+      <div x-show="lang === 'en'" dir="ltr" class="space-y-6">
+        <div class="bg-white rounded-2xl shadow-lg p-6">
+          <p>
+            We are committed to protecting your privacy.
+            <strong>Daftar Al-Mutabaah</strong> app does not collect any
+            personal data without your consent.
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg p-6">
+          <p>
+            We may collect basic information such as names and photos solely for
+            managing classrooms within the app.
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg p-6">
+          <p>Your data is never shared with third parties.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg p-6">
+          <p>
+            Data is securely stored in iCloud when synchronization is enabled.
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg p-6">
+          <p>
+            You can delete your data at any time by deleting the app or using
+            the backup/export feature.
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg p-6">
+          <p>
+            For inquiries, please contact us at:
+            <a
+              href="mailto:hadionline1994@gmail.com"
+              class="text-blue-600 underline"
+              >hadionline1994@gmail.com</a
+            >
+          </p>
+        </div>
+      </div>
+
+      <!-- زر العودة -->
+      <div class="text-center mt-12">
+        <a
+          href="index.html"
+          class="inline-block px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-bold shadow-lg hover:scale-105 transition"
+        >
+          ⬅️ العودة للصفحة الرئيسية
+        </a>
+      </div>
+    </main>
+
+    <!-- الفوتر -->
+    <footer class="bg-gray-100 py-6 text-center text-gray-500 text-sm">
+      <p>© 2025 دفتر المتابعة. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <!-- AlpineJS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+      defer
+    ></script>
   </body>
 </html>
