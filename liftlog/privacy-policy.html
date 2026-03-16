@@ -1,0 +1,1644 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LiftLog - Privacy Policy</title>
+    <link rel="icon" type="image/png" href="icon.png" />
+    <link rel="apple-touch-icon" href="icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #06060a;
+        --bg-secondary: #0c0c14;
+        --card: rgba(255, 255, 255, 0.035);
+        --card-hover: rgba(255, 255, 255, 0.055);
+        --border: rgba(255, 255, 255, 0.06);
+        --border-accent: rgba(126, 211, 33, 0.25);
+        --accent: #7ed321;
+        --accent-bright: #96e848;
+        --accent-dim: rgba(126, 211, 33, 0.1);
+        --accent-glow: rgba(126, 211, 33, 0.15);
+        --text: #f0f0f5;
+        --text-secondary: #9b9bb0;
+        --text-muted: #555568;
+        --gradient-1: linear-gradient(135deg, #7ed321 0%, #4caf50 100%);
+        --gradient-2: linear-gradient(
+          135deg,
+          rgba(126, 211, 33, 0.15) 0%,
+          rgba(76, 175, 80, 0.05) 100%
+        );
+        --shadow-card:
+          0 4px 24px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+        --shadow-glow: 0 0 60px rgba(126, 211, 33, 0.08);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "SF Pro Text",
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.75;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+      }
+
+      /* ============ ANIMATED BACKGROUND ============ */
+      .bg-effects {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+
+      .bg-effects::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background:
+          radial-gradient(
+            ellipse at 20% 20%,
+            rgba(126, 211, 33, 0.04) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 80% 80%,
+            rgba(76, 175, 80, 0.03) 0%,
+            transparent 50%
+          );
+        animation: bgShift 20s ease-in-out infinite alternate;
+      }
+
+      .bg-grid {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image:
+          linear-gradient(rgba(126, 211, 33, 0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(126, 211, 33, 0.02) 1px, transparent 1px);
+        background-size: 60px 60px;
+        mask-image: radial-gradient(
+          ellipse at center,
+          black 30%,
+          transparent 70%
+        );
+        -webkit-mask-image: radial-gradient(
+          ellipse at center,
+          black 30%,
+          transparent 70%
+        );
+      }
+
+      @keyframes bgShift {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        100% {
+          transform: translate(-5%, -5%) rotate(3deg);
+        }
+      }
+
+      /* ============ HEADER ============ */
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(6, 6, 10, 0.75);
+        backdrop-filter: blur(24px) saturate(1.4);
+        -webkit-backdrop-filter: blur(24px) saturate(1.4);
+        border-bottom: 1px solid var(--border);
+        transition: all 0.3s ease;
+      }
+
+      .header.scrolled {
+        background: rgba(6, 6, 10, 0.92);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+      }
+
+      .header-inner {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 14px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        text-decoration: none;
+        color: var(--text);
+        transition: transform 0.2s ease;
+      }
+
+      .logo:hover {
+        transform: scale(1.02);
+      }
+
+      .logo-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        overflow: hidden;
+        flex-shrink: 0;
+        box-shadow: 0 2px 12px rgba(126, 211, 33, 0.2);
+      }
+
+      .logo-icon svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      .logo-text {
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        background: linear-gradient(135deg, #fff 0%, #ccc 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .lang-switch {
+        display: flex;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        overflow: hidden;
+        padding: 3px;
+        gap: 2px;
+      }
+
+      .lang-btn {
+        padding: 8px 20px;
+        border: none;
+        background: transparent;
+        color: var(--text-muted);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        font-family: inherit;
+        border-radius: 9px;
+        letter-spacing: 0.3px;
+      }
+
+      .lang-btn.active {
+        background: var(--gradient-1);
+        color: #000;
+        font-weight: 700;
+        box-shadow: 0 2px 12px rgba(126, 211, 33, 0.3);
+      }
+
+      .lang-btn:hover:not(.active) {
+        color: var(--text-secondary);
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      /* ============ HERO SECTION ============ */
+      .hero {
+        position: relative;
+        z-index: 1;
+        padding: 80px 32px 60px;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(
+          circle,
+          rgba(126, 211, 33, 0.08) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+
+      .hero-icon {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 28px;
+        border-radius: 28px;
+        overflow: hidden;
+        box-shadow:
+          0 8px 40px rgba(126, 211, 33, 0.25),
+          0 0 80px rgba(126, 211, 33, 0.1);
+        animation: floatIcon 6s ease-in-out infinite;
+        position: relative;
+      }
+
+      .hero-icon svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      @keyframes floatIcon {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--accent-dim);
+        border: 1px solid var(--border-accent);
+        padding: 8px 20px;
+        border-radius: 100px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--accent);
+        margin-bottom: 24px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      .hero-badge .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(0.8);
+        }
+      }
+
+      .hero h1 {
+        font-size: clamp(36px, 6vw, 56px);
+        font-weight: 800;
+        letter-spacing: -1.5px;
+        line-height: 1.15;
+        margin-bottom: 16px;
+        background: linear-gradient(
+          135deg,
+          #ffffff 0%,
+          #c8c8d4 50%,
+          #ffffff 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero p {
+        color: var(--text-secondary);
+        font-size: 17px;
+        max-width: 500px;
+        margin: 0 auto 20px;
+        line-height: 1.7;
+      }
+
+      .hero .effective-date {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border);
+        color: var(--text-muted);
+        padding: 10px 22px;
+        border-radius: 12px;
+        font-size: 13px;
+        font-weight: 500;
+      }
+
+      .hero .effective-date svg {
+        width: 14px;
+        height: 14px;
+        opacity: 0.5;
+      }
+
+      /* ============ CONTAINER ============ */
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 32px 100px;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ============ PRIVACY HIGHLIGHTS ============ */
+      .highlights {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-bottom: 64px;
+      }
+
+      .highlight-box {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 28px 20px;
+        text-align: center;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .highlight-box::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--accent),
+          transparent
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .highlight-box:hover {
+        background: var(--card-hover);
+        border-color: var(--border-accent);
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-glow);
+      }
+
+      .highlight-box:hover::before {
+        opacity: 1;
+      }
+
+      .highlight-icon {
+        width: 52px;
+        height: 52px;
+        margin: 0 auto 16px;
+        background: var(--accent-dim);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        transition: all 0.4s ease;
+      }
+
+      .highlight-box:hover .highlight-icon {
+        background: var(--accent-glow);
+        transform: scale(1.1);
+      }
+
+      .highlight-box h4 {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 6px;
+      }
+
+      .highlight-box p {
+        font-size: 12px;
+        color: var(--text-muted);
+        line-height: 1.5;
+      }
+
+      /* ============ SECTIONS ============ */
+      .policy-section {
+        margin-bottom: 24px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .policy-section:hover {
+        border-color: rgba(255, 255, 255, 0.1);
+        box-shadow: var(--shadow-card);
+      }
+
+      .section-header {
+        padding: 28px 32px 0;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .section-number {
+        width: 40px;
+        height: 40px;
+        background: var(--gradient-1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        font-weight: 800;
+        color: #000;
+        flex-shrink: 0;
+        box-shadow: 0 2px 12px rgba(126, 211, 33, 0.2);
+      }
+
+      .section-title {
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: -0.3px;
+        color: var(--text);
+      }
+
+      .section-body {
+        padding: 0 32px 28px;
+      }
+
+      .section-body p {
+        color: var(--text-secondary);
+        font-size: 15px;
+        margin-bottom: 14px;
+        line-height: 1.8;
+      }
+
+      .section-body p:last-child {
+        margin-bottom: 0;
+      }
+
+      .section-body strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      .section-body ul {
+        list-style: none;
+        padding: 0;
+        margin: 8px 0;
+      }
+
+      .section-body ul li {
+        color: var(--text-secondary);
+        font-size: 15px;
+        padding: 10px 16px 10px 44px;
+        position: relative;
+        border-radius: 10px;
+        transition: background 0.2s ease;
+        line-height: 1.7;
+      }
+
+      .section-body ul li:hover {
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .section-body ul li::before {
+        content: "";
+        position: absolute;
+        left: 20px;
+        top: 18px;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 8px rgba(126, 211, 33, 0.3);
+      }
+
+      .section-body a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 500;
+        border-bottom: 1px solid rgba(126, 211, 33, 0.2);
+        transition: all 0.2s ease;
+      }
+
+      .section-body a:hover {
+        border-bottom-color: var(--accent);
+      }
+
+      /* ============ DONTS SECTION ============ */
+      .donts-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 8px;
+      }
+
+      .dont-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 14px 16px;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 12px;
+        font-size: 14px;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        transition: all 0.2s ease;
+      }
+
+      .dont-item:hover {
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .dont-item .icon {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: rgba(126, 211, 33, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+
+      .dont-item .icon svg {
+        width: 12px;
+        height: 12px;
+        stroke: var(--accent);
+        fill: none;
+        stroke-width: 3;
+        stroke-linecap: round;
+      }
+
+      /* ============ CONTACT CARD ============ */
+      .contact-card {
+        background: var(--gradient-2);
+        border: 1px solid var(--border-accent);
+        border-radius: 16px;
+        padding: 28px;
+        margin-top: 16px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .contact-card:hover {
+        border-color: rgba(126, 211, 33, 0.4);
+        box-shadow: 0 0 30px rgba(126, 211, 33, 0.06);
+      }
+
+      .contact-avatar {
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        background: var(--gradient-1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        font-weight: 800;
+        color: #000;
+        flex-shrink: 0;
+      }
+
+      .contact-info h4 {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+
+      .contact-info p {
+        font-size: 14px;
+        color: var(--text-secondary);
+        margin: 0;
+      }
+
+      .contact-info a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s ease;
+      }
+
+      .contact-info a:hover {
+        color: var(--accent-bright);
+      }
+
+      /* ============ FOOTER ============ */
+      .footer {
+        text-align: center;
+        padding: 40px 32px;
+        color: var(--text-muted);
+        font-size: 13px;
+        border-top: 1px solid var(--border);
+        position: relative;
+        z-index: 1;
+      }
+
+      .footer-inner {
+        max-width: 900px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .footer-inner .mini-logo {
+        width: 20px;
+        height: 20px;
+        border-radius: 6px;
+        overflow: hidden;
+        opacity: 0.4;
+      }
+
+      .footer-inner .mini-logo svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* ============ SCROLL ANIMATIONS ============ */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+          transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ============ RTL SUPPORT ============ */
+      [dir="rtl"] {
+        font-family:
+          "Noto Sans Arabic",
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+      }
+
+      [dir="rtl"] .section-body ul li {
+        padding: 10px 44px 10px 16px;
+      }
+
+      [dir="rtl"] .section-body ul li::before {
+        left: auto;
+        right: 20px;
+      }
+
+      [dir="rtl"] .dont-item {
+        flex-direction: row-reverse;
+        text-align: right;
+      }
+
+      .content-en,
+      .content-ar {
+        display: none;
+      }
+      .content-en.active,
+      .content-ar.active {
+        display: block;
+      }
+
+      /* ============ RESPONSIVE ============ */
+      @media (max-width: 768px) {
+        .highlights {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px;
+        }
+
+        .donts-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .header-inner {
+          padding: 12px 20px;
+        }
+        .hero {
+          padding: 60px 20px 40px;
+        }
+        .container {
+          padding: 0 20px 80px;
+        }
+        .section-header {
+          padding: 24px 24px 0;
+        }
+        .section-body {
+          padding: 0 24px 24px;
+        }
+        .contact-card {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .logo-icon {
+          width: 36px;
+          height: 36px;
+          border-radius: 10px;
+        }
+        .logo-text {
+          font-size: 17px;
+        }
+        .lang-btn {
+          padding: 6px 14px;
+          font-size: 12px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .highlights {
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+        }
+
+        .highlight-box {
+          padding: 20px 14px;
+        }
+        .highlight-icon {
+          width: 44px;
+          height: 44px;
+          font-size: 18px;
+        }
+        .section-title {
+          font-size: 17px;
+        }
+        .hero-icon {
+          width: 80px;
+          height: 80px;
+          border-radius: 22px;
+        }
+      }
+
+      /* ============ SCROLLBAR ============ */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-effects">
+      <div class="bg-grid"></div>
+    </div>
+
+    <!-- HEADER -->
+    <div class="header" id="header">
+      <div class="header-inner">
+        <a class="logo" href="#">
+          <div class="logo-icon">
+            <img src="icon.png" alt="LiftLog Logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;" />
+          </div>
+          <span class="logo-text">LiftLog</span>
+        </a>
+        <div class="lang-switch">
+          <button
+            class="lang-btn active"
+            onclick="switchLang('en')"
+            id="btn-en"
+          >
+            English
+          </button>
+          <button class="lang-btn" onclick="switchLang('ar')" id="btn-ar">
+            العربية
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== ENGLISH CONTENT ==================== -->
+    <div class="content-en active" id="content-en">
+      <div class="hero">
+        <div class="hero-icon">
+          <img src="icon.png" alt="LiftLog Logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 28px;" />
+        </div>
+        <div class="hero-badge"><span class="dot"></span> Privacy First</div>
+        <h1>Privacy Policy</h1>
+        <p>LiftLog — Gym & Workout Log</p>
+        <div class="effective-date">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <rect x="3" y="4" width="18" height="18" rx="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+          </svg>
+          Effective: March 16, 2026
+        </div>
+      </div>
+
+      <div class="container">
+        <!-- HIGHLIGHTS -->
+        <div class="highlights">
+          <div class="highlight-box fade-in">
+            <div class="highlight-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#7ED321"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <rect x="5" y="11" width="14" height="10" rx="2" />
+                <path d="M12 3a4 4 0 0 0-4 4v4h8V7a4 4 0 0 0-4-4z" />
+              </svg>
+            </div>
+            <h4>On-Device Storage</h4>
+            <p>All data stays on your device</p>
+          </div>
+          <div class="highlight-box fade-in">
+            <div class="highlight-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#7ED321"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+                <line x1="1" y1="1" x2="23" y2="23" />
+              </svg>
+            </div>
+            <h4>No Tracking</h4>
+            <p>Zero analytics or user tracking</p>
+          </div>
+          <div class="highlight-box fade-in">
+            <div class="highlight-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#7ED321"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <polyline points="9 12 11 14 15 10" />
+              </svg>
+            </div>
+            <h4>No Data Collection</h4>
+            <p>We don't collect personal info</p>
+          </div>
+          <div class="highlight-box fade-in">
+            <div class="highlight-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#7ED321"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
+              </svg>
+            </div>
+            <h4>No Data Sales</h4>
+            <p>Your data is never sold</p>
+          </div>
+        </div>
+
+        <!-- SECTION 1 -->
+        <div class="policy-section fade-in">
+          <div class="section-header">
+            <div class="section-number">1</div>
+            <h2 class="section-title">Introduction</h2>
+          </div>
+          <div class="section-body">
+            <p>
+              LiftLog ("we", "our", or "the app") is a workout logging
+              application developed by Hadi Alharbi. We are committed to
+              protecting your privacy. This Privacy Policy explains how we
+              handle information when you use our app.
+            </p>
+            <p>
+              By using LiftLog, you agree to the practices described in this
+              policy.
+            </p>
+          </div>
+        </div>
+
+        <!-- SECTION 2 -->
+        <div class="policy-section fade-in">
+          <div class="section-header">
+            <div class="section-number">2</div>
+            <h2 class="section-title">Data We Collect</h2>
+          </div>
+          <div class="section-body">
+            <p>
+              LiftLog is designed with a privacy-first approach. The app stores
+              the following data <strong>locally on your device only</strong>:
+            </p>
+            <ul>
+              <li>
+                Workout sessions (exercises, sets, weights, reps, dates, and
+                duration)
+              </li>
+              <li>Custom workout templates</li>
+              <li>Saved exercise names for autocomplete</li>
+              <li>App preferences (language, onboarding status)</li>
+            </ul>
+            <p>
+              This data is never automatically uploaded to any server. It
+              remains entirely on your device unless you choose to export it
+              manually.
+            </p>
+          </div>
+        </div>
+
+        <!-- SECTION 3 -->
+        <div class="policy-section fade-in">
+          <div class="section-header">
+            <div class="section-number">3</div>
+            <h2 class="section-title">Third-Party Services</h2>
+          </div>
+          <div class="section-body">
+            <p>LiftLog uses the following third-party services:</p>
+            <ul>
+              <li>
+                <strong>RevenueCat</strong> — Used to manage in-app
+                subscriptions. RevenueCat may collect anonymized subscription
+                status, app version, and device model. No personal information
+                such as your name, email, or payment details is shared with
+                RevenueCat by LiftLog. For more information, visit
+                <a href="https://www.revenuecat.com/privacy" target="_blank"
+                  >RevenueCat's Privacy Policy</a
+                >.
+              </li>
+              <li>
+                <strong>Apple In-App Purchase</strong> — All payment processing
+                is handled securely by Apple. LiftLog does not have access to
+                your payment information.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- SECTION 4 -->
+        <div class="policy-section fade-in">
+          <div class="section-header">
+            <div class="section-number">4</div>
+            <h2 class="section-title">Data Storage & Security</h2>
+          </div>
+          <div class="section-body">
+            <p>
+              All workout data is stored locally on your device using Apple's
+              SwiftData framework. Your data is protected by your device's
+              built-in security features, including encryption and passcode
+              protection.
+            </p>
+            <p>
+              When you create a backup (.liftlog file), the data is exported
+              locally and includes a SHA-256 checksum for integrity
+              verification. Backup files are not uploaded anywhere
+              automatically.
+            </p>
+          </div>
+        </div>
+
+        <!-- SECTION 5 -->
+        <div class="policy-section fade-in">
+          <div class="section-header">
+            <div class="section-number">5</div>
+            <h2 class="section-title">Data Export & Backup</h2>
+          </div>
+          <div class="section-body">
+            <p>You can export your workout data in the following formats:</p>
+            <ul>
+              <li>CSV (spreadsheet format)</li>
+              <li>PDF (printable report)</li>
+              <li>Full backup (.liftlog file)</li>
+            </ul>
+            <p>
+              All exports are initiated by you and saved locally. We do not have
+              access to your exported files.
+            </p>
+          </div>
+        </div>
+
+        <!-- SECTION 6 -->
+        <div class="policy-section fade-in">
+          <div class="section-header">
+            <div class="section-number">6</div>
+            <h2 class="section-title">What We Don't Do</h2>
+          </div>
+          <div class="section-body">
+            <div class="donts-grid">
+              <div class="dont-item">
+                <div class="icon">
+                  <svg viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </div>
+                Collect personal information (name, email, phone)
+              </div>
+              <div class="dont-item">
+                <div class="icon">
+                  <svg viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </div>
+                Use analytics or tracking tools
+              </div>
+              <div class="dont-item">
+                <div class="icon">
+                  <svg viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </div>
+                Share or sell data to third parties
+              </div>
+              <div class="dont-item">
+                <div class="icon">
+                  <svg viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </div>
+                Display targeted advertisements
+              </div>
+              <div class="dont-item">
+                <div class="icon">
+                  <svg viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </div>
+                Access camera, microphone, or location
+              </div>
+              <div class="dont-item">
+                <div class="icon">
+                  <svg viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </div>
+                Access your contacts
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 7 -->
+        <div class="policy-section fade-in">
+          <div class="section-header">
+            <div class="section-number">7</div>
+            <h2 class="section-title">Children's Privacy</h2>
+          </div>
+          <div class="section-body">
+            <p>
+              LiftLog is rated 4+ and does not knowingly collect any personal
+              information from children. The app does not require account
+              creation or any personal data input.
+            </p>
+          </div>
+        </div>
+
+        <!-- SECTION 8 -->
+        <div class="policy-section fade-in">
+          <div class="section-header">
+            <div class="section-number">8</div>
+            <h2 class="section-title">Your Rights</h2>
+          </div>
+          <div class="section-body">
+            <p>
+              Since all data is stored locally on your device, you have full
+              control over it at all times. You can:
+            </p>
+            <ul>
+              <li>Export your data at any time</li>
+              <li>Delete all data within the app's settings</li>
+              <li>Delete all data by uninstalling the app</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- SECTION 9 -->
+        <div class="policy-section fade-in">
+          <div class="section-header">
+            <div class="section-number">9</div>
+            <h2 class="section-title">Changes to This Policy</h2>
+          </div>
+          <div class="section-body">
+            <p>
+              We may update this Privacy Policy from time to time. Any changes
+              will be reflected on this page with an updated effective date. We
+              encourage you to review this policy periodically.
+            </p>
+          </div>
+        </div>
+
+        <!-- SECTION 10 -->
+        <div class="policy-section fade-in">
+          <div class="section-header">
+            <div class="section-number">10</div>
+            <h2 class="section-title">Contact Us</h2>
+          </div>
+          <div class="section-body">
+            <p>
+              If you have any questions about this Privacy Policy, please
+              contact us:
+            </p>
+            <div class="contact-card">
+              <div class="contact-avatar">H</div>
+              <div class="contact-info">
+                <h4>Hadi Alharbi</h4>
+                <p>
+                  Email:
+                  <a href="mailto:hadionline1994@gmail.com"
+                    >hadionline1994@gmail.com</a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== ARABIC CONTENT ==================== -->
+    <div class="content-ar" id="content-ar">
+      <div class="hero">
+        <div class="hero-icon">
+          <img src="icon.png" alt="LiftLog Logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 28px;" />
+        </div>
+        <div class="hero-badge"><span class="dot"></span> الخصوصية أولاً</div>
+        <h1>سياسة الخصوصية</h1>
+        <p>LiftLog — سجل تمارينك الرياضية</p>
+        <div class="effective-date">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <rect x="3" y="4" width="18" height="18" rx="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+          </svg>
+          تاريخ السريان: ١٦ مارس ٢٠٢٦
+        </div>
+      </div>
+
+      <div class="container">
+        <!-- HIGHLIGHTS -->
+        <div class="highlights">
+          <div class="highlight-box fade-in">
+            <div class="highlight-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#7ED321"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <rect x="5" y="11" width="14" height="10" rx="2" />
+                <path d="M12 3a4 4 0 0 0-4 4v4h8V7a4 4 0 0 0-4-4z" />
+              </svg>
+            </div>
+            <h4>تخزين على الجهاز</h4>
+            <p>جميع البيانات تبقى على جهازك</p>
+          </div>
+          <div class="highlight-box fade-in">
+            <div class="highlight-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#7ED321"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+                <line x1="1" y1="1" x2="23" y2="23" />
+              </svg>
+            </div>
+            <h4>بدون تتبع</h4>
+            <p>لا تحليلات أو تتبع للمستخدم</p>
+          </div>
+          <div class="highlight-box fade-in">
+            <div class="highlight-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#7ED321"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <polyline points="9 12 11 14 15 10" />
+              </svg>
+            </div>
+            <h4>بدون جمع بيانات</h4>
+            <p>لا نجمع معلومات شخصية</p>
+          </div>
+          <div class="highlight-box fade-in">
+            <div class="highlight-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#7ED321"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
+              </svg>
+            </div>
+            <h4>بدون بيع بيانات</h4>
+            <p>بياناتك لا تُباع أبداً</p>
+          </div>
+        </div>
+
+        <!-- SECTION 1 -->
+        <div class="policy-section fade-in">
+          <div class="section-header">
+            <div class="section-number">١</div>
+            <h2 class="section-title">المقدمة</h2>
+          </div>
+          <div class="section-body">
+            <p>
+              LiftLog ("نحن" أو "التطبيق") هو تطبيق تسجيل تمارين رياضية تم
+              تطويره بواسطة هادي الحربي. نحن ملتزمون بحماية خصوصيتك. توضح سياسة
+              الخصوصية هذه كيفية تعاملنا مع المعلومات عند استخدامك للتطبيق.
+            </p>
+            <p>
+              باستخدامك لتطبيق LiftLog، فإنك توافق على الممارسات الموضحة في هذه
+              السياسة.
+            </p>
+          </div>
+        </div>
+
+        <!-- SECTION 2 -->
+        <div class="policy-section fade-in">
+          <div class="section-header">
+            <div class="section-number">٢</div>
+            <h2 class="section-title">البيانات التي نجمعها</h2>
+          </div>
+          <div class="section-body">
+            <p>
+              تم تصميم LiftLog بنهج الخصوصية أولاً. يخزن التطبيق البيانات
+              التالية <strong>محلياً على جهازك فقط</strong>:
+            </p>
+            <ul>
+              <li>
+                جلسات التمرين (التمارين، المجموعات، الأوزان، التكرارات،
+                التواريخ، والمدة)
+              </li>
+              <li>قوالب التمرين المخصصة</li>
+              <li>أسماء التمارين المحفوظة للإكمال التلقائي</li>
+              <li>تفضيلات التطبيق (اللغة، حالة الإعداد الأولي)</li>
+            </ul>
+            <p>
+              لا يتم رفع هذه البيانات تلقائياً إلى أي خادم. تبقى بالكامل على
+              جهازك ما لم تختر تصديرها يدوياً.
+            </p>
+          </div>
+        </div>
+
+        <!-- SECTION 3 -->
+        <div class="policy-section fade-in">
+          <div class="section-header">
+            <div class="section-number">٣</div>
+            <h2 class="section-title">خدمات الطرف الثالث</h2>
+          </div>
+          <div class="section-body">
+            <p>يستخدم LiftLog الخدمات التالية من طرف ثالث:</p>
+            <ul>
+              <li>
+                <strong>RevenueCat</strong> — تُستخدم لإدارة الاشتراكات داخل
+                التطبيق. قد تجمع RevenueCat حالة الاشتراك بشكل مجهول الهوية،
+                وإصدار التطبيق، وطراز الجهاز. لا تتم مشاركة أي معلومات شخصية مثل
+                اسمك أو بريدك الإلكتروني أو تفاصيل الدفع مع RevenueCat من قبل
+                LiftLog.
+              </li>
+              <li>
+                <strong>مشتريات Apple داخل التطبيق</strong> — تتم معالجة جميع
+                المدفوعات بشكل آمن بواسطة Apple. لا يمكن لـ LiftLog الوصول إلى
+                معلومات الدفع الخاصة بك.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- SECTION 4 -->
+        <div class="policy-section fade-in">
+          <div class="section-header">
+            <div class="section-number">٤</div>
+            <h2 class="section-title">تخزين البيانات والأمان</h2>
+          </div>
+          <div class="section-body">
+            <p>
+              يتم تخزين جميع بيانات التمارين محلياً على جهازك باستخدام إطار عمل
+              SwiftData من Apple. بياناتك محمية بميزات الأمان المدمجة في جهازك،
+              بما في ذلك التشفير وحماية رمز المرور.
+            </p>
+            <p>
+              عند إنشاء نسخة احتياطية (ملف .liftlog)، يتم تصدير البيانات محلياً
+              وتتضمن مجموع تحقق SHA-256 للتحقق من سلامة البيانات. لا يتم رفع
+              ملفات النسخ الاحتياطي تلقائياً إلى أي مكان.
+            </p>
+          </div>
+        </div>
+
+        <!-- SECTION 5 -->
+        <div class="policy-section fade-in">
+          <div class="section-header">
+            <div class="section-number">٥</div>
+            <h2 class="section-title">تصدير البيانات والنسخ الاحتياطي</h2>
+          </div>
+          <div class="section-body">
+            <p>يمكنك تصدير بيانات تمارينك بالتنسيقات التالية:</p>
+            <ul>
+              <li>CSV (تنسيق جداول البيانات)</li>
+              <li>PDF (تقرير قابل للطباعة)</li>
+              <li>نسخة احتياطية كاملة (ملف .liftlog)</li>
+            </ul>
+            <p>
+              جميع عمليات التصدير يتم تنفيذها بواسطتك وحفظها محلياً. لا يمكننا
+              الوصول إلى ملفاتك المُصدّرة.
+            </p>
+          </div>
+        </div>
+
+        <!-- SECTION 6 -->
+        <div class="policy-section fade-in">
+          <div class="section-header">
+            <div class="section-number">٦</div>
+            <h2 class="section-title">ما لا نفعله</h2>
+          </div>
+          <div class="section-body">
+            <div class="donts-grid">
+              <div class="dont-item">
+                <div class="icon">
+                  <svg viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </div>
+                لا نجمع معلومات شخصية (الاسم، البريد، الهاتف)
+              </div>
+              <div class="dont-item">
+                <div class="icon">
+                  <svg viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </div>
+                لا نستخدم أدوات تحليل أو تتبع
+              </div>
+              <div class="dont-item">
+                <div class="icon">
+                  <svg viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </div>
+                لا نشارك أو نبيع بياناتك
+              </div>
+              <div class="dont-item">
+                <div class="icon">
+                  <svg viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </div>
+                لا نعرض إعلانات مستهدفة
+              </div>
+              <div class="dont-item">
+                <div class="icon">
+                  <svg viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </div>
+                لا نصل إلى الكاميرا أو الميكروفون أو الموقع
+              </div>
+              <div class="dont-item">
+                <div class="icon">
+                  <svg viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </div>
+                لا نصل إلى جهات الاتصال
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 7 -->
+        <div class="policy-section fade-in">
+          <div class="section-header">
+            <div class="section-number">٧</div>
+            <h2 class="section-title">خصوصية الأطفال</h2>
+          </div>
+          <div class="section-body">
+            <p>
+              تم تصنيف LiftLog بتقييم +4 ولا يجمع عن قصد أي معلومات شخصية من
+              الأطفال. لا يتطلب التطبيق إنشاء حساب أو إدخال أي بيانات شخصية.
+            </p>
+          </div>
+        </div>
+
+        <!-- SECTION 8 -->
+        <div class="policy-section fade-in">
+          <div class="section-header">
+            <div class="section-number">٨</div>
+            <h2 class="section-title">حقوقك</h2>
+          </div>
+          <div class="section-body">
+            <p>
+              نظراً لأن جميع البيانات مخزنة محلياً على جهازك، فلديك السيطرة
+              الكاملة عليها في جميع الأوقات. يمكنك:
+            </p>
+            <ul>
+              <li>تصدير بياناتك في أي وقت</li>
+              <li>حذف جميع البيانات من إعدادات التطبيق</li>
+              <li>حذف جميع البيانات عن طريق إلغاء تثبيت التطبيق</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- SECTION 9 -->
+        <div class="policy-section fade-in">
+          <div class="section-header">
+            <div class="section-number">٩</div>
+            <h2 class="section-title">التغييرات على هذه السياسة</h2>
+          </div>
+          <div class="section-body">
+            <p>
+              قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. سيتم عرض أي تغييرات
+              على هذه الصفحة مع تاريخ سريان محدّث. نشجعك على مراجعة هذه السياسة
+              بشكل دوري.
+            </p>
+          </div>
+        </div>
+
+        <!-- SECTION 10 -->
+        <div class="policy-section fade-in">
+          <div class="section-header">
+            <div class="section-number">١٠</div>
+            <h2 class="section-title">اتصل بنا</h2>
+          </div>
+          <div class="section-body">
+            <p>
+              إذا كانت لديك أي أسئلة حول سياسة الخصوصية هذه، يرجى التواصل معنا:
+            </p>
+            <div class="contact-card">
+              <div class="contact-avatar">هـ</div>
+              <div class="contact-info">
+                <h4>هادي الحربي</h4>
+                <p>
+                  البريد الإلكتروني:
+                  <a href="mailto:hadionline1994@gmail.com"
+                    >hadionline1994@gmail.com</a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-inner">
+        <div class="mini-logo">
+          <img src="icon.png" alt="LiftLog" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;" />
+        </div>
+        &copy; 2026 Hadi Alharbi. All rights reserved.
+      </div>
+    </div>
+
+    <script>
+      // Language Switching
+      function switchLang(lang) {
+        const html = document.documentElement;
+        const enContent = document.getElementById("content-en");
+        const arContent = document.getElementById("content-ar");
+        const btnEn = document.getElementById("btn-en");
+        const btnAr = document.getElementById("btn-ar");
+
+        if (lang === "ar") {
+          html.lang = "ar";
+          html.dir = "rtl";
+          enContent.classList.remove("active");
+          arContent.classList.add("active");
+          btnAr.classList.add("active");
+          btnEn.classList.remove("active");
+        } else {
+          html.lang = "en";
+          html.dir = "ltr";
+          arContent.classList.remove("active");
+          enContent.classList.add("active");
+          btnEn.classList.add("active");
+          btnAr.classList.remove("active");
+        }
+
+        // Re-trigger scroll animations for new content
+        setTimeout(() => observeElements(), 100);
+      }
+
+      // Sticky Header Effect
+      const header = document.getElementById("header");
+      window.addEventListener("scroll", () => {
+        header.classList.toggle("scrolled", window.scrollY > 20);
+      });
+
+      // Scroll Reveal Animations
+      function observeElements() {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry, index) => {
+              if (entry.isIntersecting) {
+                setTimeout(() => {
+                  entry.target.classList.add("visible");
+                }, index * 60);
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
+        );
+
+        document
+          .querySelectorAll(".fade-in:not(.visible)")
+          .forEach((el) => observer.observe(el));
+      }
+
+      // Initialize
+      document.addEventListener("DOMContentLoaded", observeElements);
+    </script>
+  </body>
+</html>
