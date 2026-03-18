@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiftLog - دليل المستخدم</title>
+    <style>
+        /* ===== CSS Variables for Theming ===== */
+        :root {
+            --bg-primary: #0F0F14;
+            --bg-secondary: #1C1C24;
+            --bg-card: #22222E;
+            --accent: #00D170;
+            --accent-hover: #00B860;
+            --secondary: #FF8C00;
+            --gold: #FFD700;
+            --blue: #6BB8FF;
+            --purple: #CC66FF;
+            --red: #FF4444;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A6A6A6;
+            --text-muted: #666666;
+            --border: rgba(255,255,255,0.08);
+            --shadow: rgba(0,0,0,0.4);
+            --nav-bg: rgba(15,15,20,0.95);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #F5F5F7;
+            --bg-secondary: #FFFFFF;
+            --bg-card: #EEEEF0;
+            --accent: #00A85A;
+            --accent-hover: #008F4D;
+            --text-primary: #1A1A1A;
+            --text-secondary: #555555;
+            --text-muted: #999999;
+            --border: rgba(0,0,0,0.08);
+            --shadow: rgba(0,0,0,0.1);
+            --nav-bg: rgba(245,245,247,0.95);
+        }
+
+        /* ===== Reset & Base ===== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Tahoma, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-size: 16px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* ===== Navigation ===== */
+        .nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 100;
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+        }
+
+        .nav-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .nav-logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo img {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 8px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+        }
+
+        .nav-toc-btn {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 8px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        /* ===== Layout ===== */
+        .page-wrapper {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 64px;
+        }
+
+        /* ===== Sidebar TOC ===== */
+        .sidebar {
+            position: fixed;
+            top: 64px;
+            right: calc((100vw - 1200px) / 2);
+            width: 280px;
+            height: calc(100vh - 64px);
+            overflow-y: auto;
+            padding: 24px 16px;
+            border-left: 1px solid var(--border);
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--text-muted);
+            border-radius: 4px;
+        }
+
+        .sidebar-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-list li {
+            margin-bottom: 4px;
+        }
+
+        .toc-list a {
+            display: block;
+            padding: 6px 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            border-radius: 8px;
+            border-right: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .toc-list a:hover,
+        .toc-list a.active {
+            color: var(--accent);
+            background: rgba(0, 209, 112, 0.06);
+            border-right-color: var(--accent);
+        }
+
+        .toc-list .toc-sub {
+            padding-right: 24px;
+            font-size: 13px;
+        }
+
+        /* ===== Main Content ===== */
+        .main-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 32px 80px;
+            margin-left: auto;
+            margin-right: 300px;
+        }
+
+        /* ===== Hero Section ===== */
+        .hero {
+            text-align: center;
+            padding: 60px 0 40px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 48px;
+        }
+
+        .hero-icon {
+            margin-bottom: 20px;
+        }
+
+        .hero-icon img {
+            width: 120px;
+            height: 120px;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 209, 112, 0.3), 0 0 60px rgba(0, 209, 112, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--accent), #00E87B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .hero-tagline {
+            font-size: 14px;
+            color: var(--text-muted);
+            letter-spacing: 4px;
+            font-weight: 600;
+        }
+
+        /* ===== Section Styles ===== */
+        .section {
+            margin-bottom: 56px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .section-icon {
+            font-size: 28px;
+        }
+
+        .section-header h2 {
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        .subsection {
+            margin-bottom: 36px;
+        }
+
+        .subsection h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+        }
+
+        /* ===== Cards ===== */
+        .info-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+        }
+
+        .info-card.tip {
+            border-right: 4px solid var(--accent);
+        }
+
+        .info-card.warning {
+            border-right: 4px solid var(--secondary);
+        }
+
+        .info-card.important {
+            border-right: 4px solid var(--gold);
+        }
+
+        .info-card .card-label {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .info-card.tip .card-label { color: var(--accent); }
+        .info-card.warning .card-label { color: var(--secondary); }
+        .info-card.important .card-label { color: var(--gold); }
+
+        /* ===== Steps ===== */
+        .steps {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+        }
+
+        .steps li {
+            counter-increment: step;
+            position: relative;
+            padding: 16px 20px 16px 0;
+            padding-right: 56px;
+            margin-bottom: 12px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .steps li::before {
+            content: counter(step);
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            background: var(--accent);
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        /* ===== Feature Grid ===== */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .feature-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            text-align: center;
+            transition: border-color 0.2s;
+        }
+
+        .feature-item:hover {
+            border-color: var(--accent);
+        }
+
+        .feature-item .fi-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .feature-item h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .feature-item p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        /* ===== Tabs Component ===== */
+        .tab-bar {
+            display: flex;
+            gap: 4px;
+            background: var(--bg-secondary);
+            padding: 4px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+            overflow-x: auto;
+        }
+
+        .tab-bar-item {
+            flex: 1;
+            text-align: center;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: default;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .tab-bar-item.active {
+            background: var(--accent);
+            color: #000;
+        }
+
+        /* ===== Set Type Badges ===== */
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .badge-working { background: rgba(255,255,255,0.1); color: var(--text-secondary); }
+        .badge-warmup { background: rgba(107,184,255,0.15); color: var(--blue); }
+        .badge-dropset { background: rgba(204,102,255,0.15); color: var(--purple); }
+        .badge-failure { background: rgba(255,68,68,0.15); color: var(--red); }
+        .badge-pr { background: rgba(255,215,0,0.15); color: var(--gold); }
+        .badge-bw { background: rgba(0,209,112,0.15); color: var(--accent); }
+
+        /* ===== Collapsible FAQ ===== */
+        .faq-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 16px;
+            font-weight: 600;
+            padding: 18px 24px;
+            text-align: right;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: inherit;
+            transition: color 0.2s;
+        }
+
+        .faq-question:hover {
+            color: var(--accent);
+        }
+
+        .faq-question .arrow {
+            transition: transform 0.3s;
+            font-size: 14px;
+        }
+
+        .faq-item.open .faq-question .arrow {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer-inner {
+            padding: 0 24px 18px;
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+        }
+
+        /* ===== Keyboard Shortcut Style ===== */
+        kbd {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 2px 8px;
+            font-family: inherit;
+            font-size: 13px;
+            color: var(--text-primary);
+        }
+
+        /* ===== Scroll to Top ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 32px;
+            left: 32px;
+            width: 48px;
+            height: 48px;
+            background: var(--accent);
+            color: #000;
+            border: none;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .footer .footer-brand {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 1024px) {
+            .sidebar {
+                display: none;
+            }
+
+            .sidebar.mobile-open {
+                display: block;
+                position: fixed;
+                top: 64px;
+                right: 0;
+                left: 0;
+                width: 100%;
+                height: calc(100vh - 64px);
+                background: var(--bg-primary);
+                z-index: 90;
+                border-left: none;
+            }
+
+            .nav-toc-btn {
+                display: block;
+            }
+
+            .main-content {
+                margin-right: 0;
+                padding: 32px 20px 80px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .section-header h2 {
+                font-size: 22px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tab-bar {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+    <div class="nav-inner">
+        <div class="nav-logo">
+            <img src="app_icon.png" alt="LiftLog">
+            <span>LiftLog</span>
+        </div>
+        <div class="nav-actions">
+            <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
+                الوضع الفاتح
+            </button>
+            <button class="nav-toc-btn" onclick="toggleSidebar()" id="tocBtn">
+                &#9776;
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Sidebar TOC -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-title">المحتويات</div>
+    <ul class="toc-list">
+        <li><a href="#intro">مقدمة عن التطبيق</a></li>
+        <li><a href="#first-open">فتح التطبيق لأول مرة</a></li>
+        <li><a href="#main-tabs">الشاشات الرئيسية</a></li>
+        <li><a href="#tab-today" class="toc-sub">اليوم</a></li>
+        <li><a href="#tab-history" class="toc-sub">السجل</a></li>
+        <li><a href="#tab-templates" class="toc-sub">القوالب</a></li>
+        <li><a href="#tab-analytics" class="toc-sub">التحليلات</a></li>
+        <li><a href="#tab-settings" class="toc-sub">الإعدادات</a></li>
+        <li><a href="#active-workout">تسجيل التمرين</a></li>
+        <li><a href="#sets-detail">المجموعات وأنواعها</a></li>
+        <li><a href="#previous-ref">أرقام الجلسة السابقة</a></li>
+        <li><a href="#pr">الأرقام القياسية</a></li>
+        <li><a href="#exercise-groups">مجموعات التمارين</a></li>
+        <li><a href="#export-import">التصدير والاستيراد</a></li>
+        <li><a href="#scenarios">سيناريوهات الاستخدام</a></li>
+        <li><a href="#tips">نصائح للمبتدئين</a></li>
+        <li><a href="#faq">الأسئلة الشائعة</a></li>
+    </ul>
+</aside>
+
+<!-- Main Content -->
+<div class="page-wrapper">
+<main class="main-content">
+
+    <!-- Hero -->
+    <div class="hero">
+        <div class="hero-icon"><img src="app_icon.png" alt="LiftLog App Icon"></div>
+        <h1>دليل مستخدم LiftLog</h1>
+        <p class="hero-subtitle">كل ما تحتاج معرفته لاستخدام التطبيق باحترافية</p>
+        <p class="hero-tagline">LIFT &middot; LOG &middot; GROW</p>
+    </div>
+
+    <!-- ============================== -->
+    <!-- 1. INTRODUCTION -->
+    <!-- ============================== -->
+    <section class="section" id="intro">
+        <div class="section-header">
+            <span class="section-icon">&#128218;</span>
+            <h2>ما هو LiftLog؟</h2>
+        </div>
+
+        <p>
+            LiftLog هو تطبيق مصمم خصيصاً للاعبي كمال الأجسام ورفع الأثقال. يحوّل تجربة الدفتر والقلم التقليدية إلى تجربة رقمية سريعة واحترافية. الفكرة بسيطة: تسجّل تمارينك بسرعة، وفي كل مرة ترجع للتمرين، يعرض لك التطبيق أرقام المرة اللي قبلها عشان تعرف هدفك وتتحسّن.
+        </p>
+
+        <div class="feature-grid">
+            <div class="feature-item">
+                <div class="fi-icon">&#9889;</div>
+                <h4>تسجيل سريع</h4>
+                <p>سجّل الوزن والتكرارات في ثوانٍ معدودة</p>
+            </div>
+            <div class="feature-item">
+                <div class="fi-icon">&#128200;</div>
+                <h4>تتبّع التقدّم</h4>
+                <p>رسوم بيانية توضح تطوّرك عبر الزمن</p>
+            </div>
+            <div class="feature-item">
+                <div class="fi-icon">&#128203;</div>
+                <h4>قوالب ذكية</h4>
+                <p>أنشئ قالب مرة واحدة واستخدمه كل أسبوع</p>
+            </div>
+            <div class="feature-item">
+                <div class="fi-icon">&#128274;</div>
+                <h4>بدون إنترنت</h4>
+                <p>كل بياناتك محفوظة محلياً على جهازك</p>
+            </div>
+            <div class="feature-item">
+                <div class="fi-icon">&#127760;</div>
+                <h4>عربي وإنجليزي</h4>
+                <p>واجهة كاملة باللغتين مع دعم RTL</p>
+            </div>
+            <div class="feature-item">
+                <div class="fi-icon">&#9729;&#65039;</div>
+                <h4>مزامنة iCloud</h4>
+                <p>بياناتك تنتقل معك لأي جهاز آبل</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- 2. FIRST OPEN -->
+    <!-- ============================== -->
+    <section class="section" id="first-open">
+        <div class="section-header">
+            <span class="section-icon">&#128241;</span>
+            <h2>فتح التطبيق لأول مرة</h2>
+        </div>
+
+        <p>
+            عند فتح التطبيق لأول مرة، ستمر بشاشات ترحيبية تعريفية تشرح لك أهم ميزات التطبيق. هذه الشاشات تظهر مرة واحدة فقط.
+        </p>
+
+        <div class="subsection">
+            <h3>&#127775; شاشات الترحيب</h3>
+            <ol class="steps">
+                <li>شاشة ترحيبية مع شعار LiftLog المتحرك وعبارة "LIFT. LOG. GROW."</li>
+                <li>ثلاث شاشات تعرض أهم مميزات التطبيق: التسجيل السريع، تتبّع التقدّم، والقوالب الجاهزة</li>
+                <li>ثلاث شاشات توضّح المشاكل التي يحلها التطبيق مقارنة بالدفتر الورقي</li>
+                <li>شاشة عرض اشتراك Pro (يمكنك تخطيها إذا أردت استخدام النسخة المجانية)</li>
+            </ol>
+
+            <div class="info-card tip">
+                <div class="card-label">&#128161; نصيحة</div>
+                <p>بعد انتهاء شاشات الترحيب، ستنتقل مباشرة إلى الشاشة الرئيسية وتبدأ باستخدام التطبيق فوراً.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- 3. MAIN TABS -->
+    <!-- ============================== -->
+    <section class="section" id="main-tabs">
+        <div class="section-header">
+            <span class="section-icon">&#128736;</span>
+            <h2>الشاشات الرئيسية</h2>
+        </div>
+
+        <p>
+            التطبيق مقسّم إلى خمسة أقسام رئيسية تصل إليها من شريط التبويب في أسفل الشاشة:
+        </p>
+
+        <div class="tab-bar">
+            <div class="tab-bar-item active">&#128293; اليوم</div>
+            <div class="tab-bar-item">&#128197; السجل</div>
+            <div class="tab-bar-item">&#128203; القوالب</div>
+            <div class="tab-bar-item">&#128200; التحليلات</div>
+            <div class="tab-bar-item">&#9881;&#65039; الإعدادات</div>
+        </div>
+
+        <!-- TAB: TODAY -->
+        <div class="subsection" id="tab-today">
+            <h3>&#128293; تبويب "اليوم"</h3>
+            <p>
+                هذه الشاشة الرئيسية التي تراها عند فتح التطبيق. مصممة عشان تبدأ تمرينك بأسرع وقت ممكن.
+            </p>
+
+            <p><strong>ما الذي تراه في هذه الشاشة:</strong></p>
+
+            <div class="info-card">
+                <p><strong>&#128197; التاريخ:</strong> يظهر تاريخ اليوم الحالي في الأعلى (مثلاً: "الثلاثاء، 18 مارس").</p>
+                <p><strong>&#128203; قالب اليوم:</strong> إذا كان عندك قالب مربوط بيوم اليوم، يظهر اسمه تلقائياً. وإذا ما كان فيه قالب، تظهر رسالة "لا يوجد قالب لهذا اليوم".</p>
+                <p><strong>&#9654;&#65039; زر بدء التمرين:</strong> زر كبير وواضح يبدأ جلسة تمرين جديدة.</p>
+                <p><strong>&#128260; زر متابعة التمرين:</strong> إذا كان عندك تمرين ما انتهى بعد من اليوم، يظهر زر "متابعة التمرين" بدل "بدء التمرين".</p>
+                <p style="margin-bottom:0;"><strong>&#128202; رسم تكرار أسبوعي:</strong> رسم بياني يعرض عدد التمارين التي أديتها في كل أسبوع خلال آخر 8 أسابيع.</p>
+            </div>
+
+            <p><strong>كيف تبدأ تمرينك:</strong></p>
+            <ol class="steps">
+                <li>اضغط على زر <strong>"بدء التمرين"</strong></li>
+                <li>ستظهر قائمة بقوالبك المحفوظة — اختر القالب المناسب</li>
+                <li>أو اختر <strong>"تمرين فارغ"</strong> إذا تبي تضيف التمارين يدوياً</li>
+                <li>بعد الاختيار، تنتقل مباشرة لشاشة تسجيل التمرين</li>
+            </ol>
+        </div>
+
+        <!-- TAB: HISTORY -->
+        <div class="subsection" id="tab-history">
+            <h3>&#128197; تبويب "السجل"</h3>
+            <p>
+                هنا تجد سجل كل تمارينك السابقة مرتبة حسب التاريخ ومجمّعة حسب الشهر.
+            </p>
+
+            <div class="info-card">
+                <p><strong>&#128269; البحث:</strong> في أعلى الشاشة يوجد حقل بحث يمكنك من خلاله البحث باسم التمرين أو التاريخ أو ملاحظات الجلسة.</p>
+                <p><strong>&#128197; التجميع الشهري:</strong> التمارين مجمّعة حسب الشهر والسنة (مثلاً: "مارس 2026")، والأحدث يظهر أولاً.</p>
+                <p style="margin-bottom:0;"><strong>&#128196; بطاقة كل جلسة:</strong> تعرض تاريخ الجلسة، أسماء التمارين، وإحصائيات سريعة (عدد التمارين، عدد المجموعات، الحجم الكلي بالكيلو، المدة).</p>
+            </div>
+
+            <p><strong>ما يمكنك فعله:</strong></p>
+            <ol class="steps">
+                <li><strong>عرض التفاصيل:</strong> اضغط على أي جلسة لرؤية كل التمارين والمجموعات بالتفصيل</li>
+                <li><strong>تعديل جلسة:</strong> من داخل صفحة التفاصيل، اضغط على القائمة (&#8942;) ثم "تعديل"</li>
+                <li><strong>تكرار تمرين:</strong> اضغط "تكرار التمرين" لإنشاء نسخة لليوم بنفس التمارين</li>
+                <li><strong>حفظ كقالب:</strong> اضغط "حفظ كقالب" لتحويل جلسة سابقة إلى قالب قابل لإعادة الاستخدام</li>
+                <li><strong>حذف جلسة:</strong> اضغط مطولاً على الجلسة واختر "حذف" (ستظهر رسالة تأكيد)</li>
+            </ol>
+        </div>
+
+        <!-- TAB: TEMPLATES -->
+        <div class="subsection" id="tab-templates">
+            <h3>&#128203; تبويب "القوالب"</h3>
+            <p>
+                القوالب هي الطريقة الذكية لتسريع بدء تمارينك. بدل ما تضيف التمارين يدوياً كل مرة، تنشئ قالب مرة واحدة وتستخدمه كل أسبوع.
+            </p>
+
+            <p><strong>إنشاء قالب جديد:</strong></p>
+            <ol class="steps">
+                <li>اضغط على أيقونة <strong>"+"</strong> في أعلى الشاشة</li>
+                <li>أدخل اسم القالب (مثلاً: "يوم الصدر والباي")</li>
+                <li>ستنتقل لشاشة تعديل القالب حيث يمكنك إضافة التمارين</li>
+            </ol>
+
+            <p><strong>تعديل القالب:</strong></p>
+            <div class="info-card">
+                <p><strong>&#9999;&#65039; اسم القالب:</strong> يمكنك تعديل الاسم في أي وقت من خانة الاسم في أعلى الصفحة.</p>
+                <p><strong>&#128197; ربط بيوم:</strong> اختر يوم من أيام الأسبوع (الأحد إلى السبت) لربط القالب به. عندما يأتي ذلك اليوم، يظهر القالب تلقائياً في شاشة "اليوم".</p>
+                <p><strong>&#10133; إضافة تمرين:</strong> اضغط "إضافة تمرين" لإضافة تمرين مفرد، أو "إضافة مجموعة تمارين" لإنشاء مجموعة فيها عدة تمارين فرعية.</p>
+                <p style="margin-bottom:0;"><strong>&#128290; عدد المجموعات:</strong> لكل تمرين يمكنك تحديد عدد المجموعات الافتراضي (من 1 إلى 10) باستخدام أزرار + و -.</p>
+            </div>
+
+            <div class="info-card tip">
+                <div class="card-label">&#128161; نصيحة</div>
+                <p>يمكنك تجربة التطبيق بسرعة عبر الضغط على قائمة "بيانات تجريبية" واختيار "قوالب تجريبية" — سيضيف التطبيق قوالب جاهزة يمكنك التعديل عليها.</p>
+            </div>
+        </div>
+
+        <!-- TAB: ANALYTICS -->
+        <div class="subsection" id="tab-analytics">
+            <h3>&#128200; تبويب "التحليلات"</h3>
+            <p>
+                هنا تشاهد تقدّمك بصرياً عبر رسوم بيانية تفاعلية تغطي كل تمرين تؤديه.
+            </p>
+
+            <p><strong>النطاق الزمني:</strong> في أعلى الشاشة تجد أربعة أزرار للتحكم بالفترة الزمنية المعروضة:</p>
+
+            <div class="tab-bar" style="max-width:400px;">
+                <div class="tab-bar-item">1 شهر</div>
+                <div class="tab-bar-item active">3 أشهر</div>
+                <div class="tab-bar-item">6 أشهر</div>
+                <div class="tab-bar-item">سنة</div>
+            </div>
+
+            <p><strong>الإحصائيات العامة:</strong> ثلاث بطاقات تعرض عدد التمارين الكلي وعدد التمارين وعدد المجموعات خلال الفترة المحددة.</p>
+
+            <p><strong>رسم التكرار الأسبوعي:</strong> رسم بياني بأعمدة يعرض كم مرة تدرّبت في كل أسبوع.</p>
+
+            <p><strong>اختيار التمرين:</strong> قائمة أفقية قابلة للتمرير فيها كل أسماء التمارين المحفوظة. اضغط على أي تمرين لعرض الرسوم البيانية الخاصة به:</p>
+
+            <div class="info-card">
+                <p><strong>&#128200; رسم تطوّر الوزن:</strong> يعرض أقصى وزن رفعته في كل جلسة عبر الزمن. يظهر خط متقطع عند الرقم القياسي، والنقاط الذهبية تشير للجلسات التي حققت فيها أو تجاوزت رقمك القياسي.</p>
+                <p><strong>&#128202; رسم الحجم الكلي:</strong> يعرض إجمالي الحجم (الوزن × التكرارات) لكل جلسة، وهو مؤشر ممتاز على شدة التمرين.</p>
+                <p><strong>&#128201; رسم التكرارات:</strong> يعرض إجمالي التكرارات لكل جلسة.</p>
+                <p style="margin-bottom:0;"><strong>&#127942; إحصائيات التمرين:</strong> أربع بطاقات تعرض أفضل وزن، متوسط الوزن، الحجم الكلي، وعدد الجلسات.</p>
+            </div>
+        </div>
+
+        <!-- TAB: SETTINGS -->
+        <div class="subsection" id="tab-settings">
+            <h3>&#9881;&#65039; تبويب "الإعدادات"</h3>
+            <p>
+                من هنا تتحكم بإعدادات التطبيق، اللغة، الاشتراك، وتصدير واستيراد البيانات.
+            </p>
+
+            <div class="info-card">
+                <p><strong>&#128081; الاشتراك:</strong> إذا كنت مشتركاً في Pro، يظهر حالة الاشتراك وتاريخ التجديد. وإذا لم تكن مشتركاً، يظهر زر "ترقية إلى Pro" وزر "استعادة المشتريات".</p>
+                <p><strong>&#127760; اللغة:</strong> اختر بين العربية والإنجليزية. عند تغيير اللغة، سيُغلق التطبيق ويعاد فتحه باللغة الجديدة.</p>
+                <p><strong>&#128228; تصدير البيانات:</strong> ثلاثة خيارات للتصدير — ملف CSV، ملف PDF، أو نسخة احتياطية كاملة بصيغة .liftlog.</p>
+                <p><strong>&#128229; استيراد البيانات:</strong> استيراد من ملف CSV أو استعادة من نسخة احتياطية .liftlog.</p>
+                <p style="margin-bottom:0;"><strong>&#128465;&#65039; إدارة البيانات:</strong> خيار "أرشفة وحذف" يصدّر بياناتك كـ CSV ثم يحذفها، و"حذف كل البيانات" يحذف كل شيء نهائياً.</p>
+            </div>
+
+            <div class="info-card warning">
+                <div class="card-label">&#9888;&#65039; تنبيه</div>
+                <p>حذف البيانات عملية لا يمكن التراجع عنها. تأكد من تصدير نسخة احتياطية قبل الحذف.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- 4. ACTIVE WORKOUT -->
+    <!-- ============================== -->
+    <section class="section" id="active-workout">
+        <div class="section-header">
+            <span class="section-icon">&#127947;</span>
+            <h2>تسجيل التمرين (الشاشة الأساسية)</h2>
+        </div>
+
+        <p>
+            هذه هي الشاشة الأهم في التطبيق — هنا تسجّل أوزانك وتكراراتك أثناء التمرين. مصممة لتكون سريعة وعملية حتى بيد واحدة.
+        </p>
+
+        <div class="subsection">
+            <h3>&#128296; أجزاء الشاشة</h3>
+
+            <div class="info-card">
+                <p><strong>&#128281; الشريط العلوي:</strong> يحتوي زر الرجوع على اليمين، تاريخ التمرين في المنتصف، وزر الملاحظات وزر "إنهاء" على اليسار.</p>
+                <p><strong>&#128221; الملاحظات:</strong> اضغط أيقونة الملاحظات في الشريط العلوي لإظهار حقل نص يمكنك فيه كتابة ملاحظات عن الجلسة (مثلاً: "تمرين خفيف بعد إصابة").</p>
+                <p><strong>&#127947; بطاقات التمارين:</strong> كل تمرين يظهر في بطاقة منفصلة فيها اسم التمرين، أرقام الجلسة السابقة، وصفوف المجموعات.</p>
+                <p style="margin-bottom:0;"><strong>&#10133; إضافة تمرين:</strong> في أسفل القائمة يوجد زر كبير "+ إضافة تمرين" يفتح شاشة البحث والإضافة.</p>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3>&#127947; إضافة تمرين جديد</h3>
+            <ol class="steps">
+                <li>اضغط على <strong>"+ إضافة تمرين"</strong> في أسفل الشاشة</li>
+                <li>اكتب اسم التمرين (مثلاً: "بنش بريس" أو "Bench Press")</li>
+                <li>إذا سبق وأدخلت هذا التمرين، سيظهر في قائمة الاقتراحات — اضغط عليه مباشرة</li>
+                <li>أو اضغط زر "إضافة" لإضافة تمرين بالاسم الذي كتبته</li>
+            </ol>
+
+            <div class="info-card tip">
+                <div class="card-label">&#128161; نصيحة</div>
+                <p>التطبيق يحفظ أسماء التمارين تلقائياً. في المرة القادمة، مجرد ما تبدأ بكتابة الاسم، ستظهر الاقتراحات فوراً.</p>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3>&#128221; تسجيل المجموعات (Sets)</h3>
+            <p>كل تمرين فيه صفوف مجموعات. كل صف يحتوي على:</p>
+
+            <div class="info-card">
+                <p><strong>&#128290; رقم المجموعة:</strong> يظهر على اليمين (S1, S2, S3...).</p>
+                <p><strong>&#9878;&#65039; الوزن:</strong> حقل رقمي مع أزرار <kbd>-2.5</kbd> و <kbd>+2.5</kbd> لتعديل الوزن بخطوات 2.5 كجم. يمكنك أيضاً الكتابة مباشرة في الحقل.</p>
+                <p><strong>&#128260; التكرارات:</strong> حقل رقمي مع أزرار <kbd>-1</kbd> و <kbd>+1</kbd> لتعديل عدد التكرارات.</p>
+                <p style="margin-bottom:0;"><strong>&#9989; زر الإتمام:</strong> دائرة على اليسار — اضغط عليها لتسجيل إتمام المجموعة (تتحول لعلامة صح خضراء). ستشعر باهتزاز خفيف كتأكيد.</p>
+            </div>
+
+            <p><strong>&#10133; إضافة وإزالة المجموعات:</strong></p>
+            <ol class="steps">
+                <li>اضغط <strong>"إضافة مجموعة"</strong> أسفل المجموعات لإضافة مجموعة جديدة</li>
+                <li>اضغط <strong>"إزالة مجموعة"</strong> لحذف آخر مجموعة (الزر يكون باللون الأحمر)</li>
+            </ol>
+        </div>
+
+        <div class="subsection">
+            <h3>&#128467;&#65039; التحكم بالتمرين</h3>
+            <p>اضغط مطولاً على بطاقة التمرين لتظهر قائمة الخيارات:</p>
+            <div class="info-card">
+                <p><strong>&#11014;&#65039; تحريك للأعلى / &#11015;&#65039; للأسفل:</strong> لتغيير ترتيب التمارين في الجلسة.</p>
+                <p><strong>&#128221; إظهار/إخفاء الملاحظات:</strong> لإضافة ملاحظة خاصة بهذا التمرين تحديداً.</p>
+                <p><strong>&#127947; تبديل وزن الجسم:</strong> لتمارين وزن الجسم (مثل العقلة) — يخفي عمود الوزن ويظهر شارة <span class="badge badge-bw">BW</span>.</p>
+                <p style="margin-bottom:0;"><strong>&#128465;&#65039; حذف التمرين:</strong> لإزالة التمرين من الجلسة.</p>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3>&#9989; إنهاء التمرين</h3>
+            <ol class="steps">
+                <li>بعد ما تنتهي من كل المجموعات، اضغط زر <strong>"إنهاء"</strong> في أعلى الشاشة</li>
+                <li>ستظهر رسالة تأكيد: "إنهاء التمرين؟"</li>
+                <li>اضغط <strong>"إنهاء"</strong> للتأكيد</li>
+                <li>يظهر شعار نجاح ذهبي مع رسالة "تم إنهاء التمرين!" ثم تعود للشاشة الرئيسية</li>
+            </ol>
+
+            <div class="info-card tip">
+                <div class="card-label">&#128161; نصيحة</div>
+                <p>إذا اضطررت للخروج قبل الإنهاء، لا تقلق — التطبيق يحفظ كل شيء تلقائياً ويمكنك الرجوع والمتابعة من زر "متابعة التمرين" في شاشة اليوم.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- 5. SET TYPES -->
+    <!-- ============================== -->
+    <section class="section" id="sets-detail">
+        <div class="section-header">
+            <span class="section-icon">&#127993;</span>
+            <h2>المجموعات وأنواعها</h2>
+        </div>
+
+        <p>
+            التطبيق يدعم أربعة أنواع من المجموعات، كل نوع له لون مميز يساعدك على التفريق بينها بسرعة:
+        </p>
+
+        <div class="feature-grid">
+            <div class="feature-item">
+                <span class="badge badge-working" style="font-size:16px;">W - Working</span>
+                <h4 style="margin-top:12px;">مجموعة عمل</h4>
+                <p>النوع الافتراضي — مجموعاتك الأساسية بالوزن الكامل</p>
+            </div>
+            <div class="feature-item">
+                <span class="badge badge-warmup" style="font-size:16px;">U - Warmup</span>
+                <h4 style="margin-top:12px;">إحماء</h4>
+                <p>مجموعات الإحماء بوزن خفيف قبل العمل الجاد</p>
+            </div>
+            <div class="feature-item">
+                <span class="badge badge-dropset" style="font-size:16px;">D - Drop Set</span>
+                <h4 style="margin-top:12px;">دروب سيت</h4>
+                <p>مجموعات بتقليل الوزن متتالياً بدون راحة</p>
+            </div>
+            <div class="feature-item">
+                <span class="badge badge-failure" style="font-size:16px;">F - Failure</span>
+                <h4 style="margin-top:12px;">فشل عضلي</h4>
+                <p>مجموعة دفعت فيها نفسك حتى الفشل العضلي</p>
+            </div>
+        </div>
+
+        <p><strong>كيف تغيّر نوع المجموعة:</strong></p>
+        <ol class="steps">
+            <li>اضغط مطولاً على رقم المجموعة (S1, S2...)</li>
+            <li>ستظهر قائمة بالأنواع الأربعة</li>
+            <li>اختر النوع المناسب — سيتغير لون الرقم فوراً</li>
+        </ol>
+    </section>
+
+    <!-- ============================== -->
+    <!-- 6. PREVIOUS REFERENCE -->
+    <!-- ============================== -->
+    <section class="section" id="previous-ref">
+        <div class="section-header">
+            <span class="section-icon">&#128218;</span>
+            <h2>أرقام الجلسة السابقة</h2>
+        </div>
+
+        <p>
+            هذه هي الميزة الجوهرية في التطبيق — ميزة <strong>التحميل التدريجي (Progressive Overload)</strong>.
+        </p>
+
+        <div class="info-card important">
+            <div class="card-label">&#11088; ميزة أساسية</div>
+            <p>
+                في كل مرة تؤدي تمريناً، يبحث التطبيق تلقائياً عن آخر مرة أديت فيها نفس التمرين ويعرض أرقامها في مربع أزرق فاتح فوق المجموعات الحالية.
+            </p>
+        </div>
+
+        <p>
+            المربع يحمل عنوان <strong>"السابق"</strong> ويعرض كل مجموعة من الجلسة السابقة بهذا الشكل:
+        </p>
+
+        <div class="info-card" style="background: rgba(107,184,255,0.08); border-color: rgba(107,184,255,0.2);">
+            <p style="color: var(--blue); font-weight: 600; margin-bottom: 8px;">السابق</p>
+            <p style="color: var(--blue); margin-bottom: 4px;">S1: 80 كجم × 10 تكرارات</p>
+            <p style="color: var(--blue); margin-bottom: 4px;">S2: 80 كجم × 8 تكرارات</p>
+            <p style="color: var(--blue); margin-bottom: 0;">S3: 75 كجم × 8 تكرارات</p>
+        </div>
+
+        <p>
+            هدفك في كل جلسة هو أن تحاول <strong>رفع أكثر</strong> أو <strong>تكرار أكثر</strong> مما فعلت المرة السابقة. هذا هو مفتاح التقدم في رفع الأثقال.
+        </p>
+    </section>
+
+    <!-- ============================== -->
+    <!-- 7. PERSONAL RECORDS -->
+    <!-- ============================== -->
+    <section class="section" id="pr">
+        <div class="section-header">
+            <span class="section-icon">&#127942;</span>
+            <h2>الأرقام القياسية (PR)</h2>
+        </div>
+
+        <p>
+            التطبيق يتتبع أرقامك القياسية تلقائياً لكل تمرين. عندما ترفع وزناً يساوي أو يتجاوز أعلى وزن سبق أن رفعته في هذا التمرين، تظهر شارة ذهبية <span class="badge badge-pr">&#127942; PR</span> بجانب المجموعة.
+        </p>
+
+        <div class="info-card">
+            <p><strong>&#127942; في شاشة التمرين:</strong> شارة ذهبية صغيرة تظهر بجانب المجموعة التي حققت فيها رقماً قياسياً جديداً.</p>
+            <p style="margin-bottom:0;"><strong>&#128200; في التحليلات:</strong> خط متقطع أفقي على رسم تطوّر الوزن يشير لأعلى وزن. النقاط الذهبية على الرسم تشير للجلسات التي حققت فيها الرقم القياسي.</p>
+        </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- 8. EXERCISE GROUPS -->
+    <!-- ============================== -->
+    <section class="section" id="exercise-groups">
+        <div class="section-header">
+            <span class="section-icon">&#128193;</span>
+            <h2>مجموعات التمارين</h2>
+        </div>
+
+        <p>
+            يمكنك تنظيم التمارين في مجموعات — مفيدة جداً للسوبر سيت أو لتجميع تمارين عضلة واحدة معاً.
+        </p>
+
+        <p><strong>إنشاء مجموعة تمارين في القالب:</strong></p>
+        <ol class="steps">
+            <li>في شاشة تعديل القالب، اضغط "إضافة مجموعة تمارين"</li>
+            <li>أدخل اسم المجموعة (مثلاً: "سوبر سيت صدر")</li>
+            <li>أضف التمارين الفرعية داخل المجموعة</li>
+            <li>يمكنك تحديد عدد المجموعات لكل تمرين فرعي بشكل مستقل</li>
+        </ol>
+
+        <p>
+            في شاشة التمرين، تظهر المجموعة بأيقونة مجلد باللون الأخضر مع اسم المجموعة، وتحتها كل التمارين الفرعية بمجموعاتها الخاصة. يمكنك إضافة تمارين فرعية جديدة أثناء التمرين أيضاً.
+        </p>
+    </section>
+
+    <!-- ============================== -->
+    <!-- 9. EXPORT & IMPORT -->
+    <!-- ============================== -->
+    <section class="section" id="export-import">
+        <div class="section-header">
+            <span class="section-icon">&#128228;</span>
+            <h2>التصدير والاستيراد</h2>
+        </div>
+
+        <div class="subsection">
+            <h3>&#128228; تصدير البيانات</h3>
+            <p>ثلاث طرق لتصدير بياناتك متوفرة من الإعدادات:</p>
+
+            <div class="info-card">
+                <p><strong>&#128196; ملف CSV:</strong> جدول بيانات يمكن فتحه في Excel أو Google Sheets. مفيد للتحليل المتقدم. يشمل التاريخ واسم التمرين والوزن والتكرارات لكل مجموعة.</p>
+                <p><strong>&#128462; ملف PDF:</strong> تقرير مهيأ للطباعة بتصميم احترافي. مفيد لمشاركة سجلك مع المدرب.</p>
+                <p style="margin-bottom:0;"><strong>&#128190; نسخة احتياطية .liftlog:</strong> نسخة كاملة من كل بياناتك (تمارين + قوالب + كل شيء). مفيدة للنقل إلى جهاز جديد أو كتأمين لبياناتك.</p>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3>&#128229; استيراد البيانات</h3>
+            <p>يمكنك استيراد البيانات من مصدرين:</p>
+
+            <div class="info-card">
+                <p><strong>&#128196; استيراد من CSV:</strong> اختر ملف CSV من جهازك. ستظهر شاشة معاينة تعرض ملخصاً للبيانات قبل الاستيراد، مع خيار للتحكم بالتعامل مع التكرارات (تخطي / استبدال / استيراد الكل).</p>
+                <p style="margin-bottom:0;"><strong>&#128190; استعادة من نسخة احتياطية:</strong> اختر ملف .liftlog لاستعادة كل بياناتك بالكامل.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- 10. USE SCENARIOS -->
+    <!-- ============================== -->
+    <section class="section" id="scenarios">
+        <div class="section-header">
+            <span class="section-icon">&#127939;</span>
+            <h2>سيناريوهات الاستخدام</h2>
+        </div>
+
+        <div class="subsection">
+            <h3>&#128170; السيناريو الأول: أول يوم تمرين</h3>
+            <p>وصلت الجيم وجاهز تسجّل تمرينك لأول مرة باستخدام التطبيق:</p>
+            <ol class="steps">
+                <li>افتح التطبيق واضغط <strong>"بدء التمرين"</strong> من شاشة اليوم</li>
+                <li>اختر <strong>"تمرين فارغ"</strong> بما إنك ما أنشأت قوالب بعد</li>
+                <li>اضغط <strong>"+ إضافة تمرين"</strong> واكتب اسم أول تمرين (مثلاً: "بنش بريس")</li>
+                <li>سجّل الوزن والتكرارات لكل مجموعة واضغط الدائرة &#9989; بعد كل مجموعة</li>
+                <li>كرر الخطوة 3 و 4 لكل تمرين في جلستك</li>
+                <li>بعد الانتهاء، اضغط <strong>"إنهاء"</strong></li>
+            </ol>
+
+            <div class="info-card tip">
+                <div class="card-label">&#128161; نصيحة</div>
+                <p>بعد أول تمرين، اذهب للسجل واضغط على الجلسة ثم اختر "حفظ كقالب" — بكذا ما تحتاج تكتب أسماء التمارين مرة ثانية.</p>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3>&#128197; السيناريو الثاني: إعداد الجدول الأسبوعي</h3>
+            <p>عندك برنامج تدريبي وتبي تجهّز قوالب لكل يوم:</p>
+            <ol class="steps">
+                <li>اذهب إلى تبويب <strong>"القوالب"</strong></li>
+                <li>اضغط <strong>"+"</strong> لإنشاء قالب جديد</li>
+                <li>سمّه (مثلاً: "يوم الصدر والترايسبس")</li>
+                <li>أضف كل التمارين وحدد عدد المجموعات لكل تمرين</li>
+                <li>اختر <strong>يوم الأسبوع</strong> المناسب (مثلاً: الأحد)</li>
+                <li>كرر لباقي أيام التدريب</li>
+            </ol>
+            <p>
+                الآن كل يوم تفتح التطبيق، يعرف أي قالب المفترض تستخدمه ويعرضه لك تلقائياً.
+            </p>
+        </div>
+
+        <div class="subsection">
+            <h3>&#128200; السيناريو الثالث: متابعة التقدّم</h3>
+            <p>بعد شهر من التدريب المنتظم، تبي تشوف هل تحسّنت:</p>
+            <ol class="steps">
+                <li>اذهب إلى تبويب <strong>"التحليلات"</strong></li>
+                <li>اختر النطاق الزمني المناسب (مثلاً: 1 شهر)</li>
+                <li>مرر في قائمة التمارين واضغط على التمرين اللي تبي تتبّعه</li>
+                <li>تأمل رسم تطوّر الوزن — إذا الخط صاعد، أنت في الطريق الصحيح</li>
+                <li>تحقق من الحجم الكلي والتكرارات أيضاً</li>
+            </ol>
+        </div>
+
+        <div class="subsection">
+            <h3>&#128190; السيناريو الرابع: النسخ الاحتياطي قبل تغيير الجهاز</h3>
+            <p>عندك جهاز جديد وتبي تنقل بياناتك:</p>
+            <ol class="steps">
+                <li>من <strong>الإعدادات</strong>، اضغط <strong>"تصدير نسخة احتياطية كاملة"</strong></li>
+                <li>شارك الملف عبر AirDrop أو iCloud أو أي طريقة</li>
+                <li>على الجهاز الجديد، ثبّت التطبيق وافتح الإعدادات</li>
+                <li>اضغط <strong>"استعادة من نسخة احتياطية"</strong> واختر الملف</li>
+                <li>تأكد من البيانات في شاشة المعاينة ثم أكّد الاستيراد</li>
+            </ol>
+
+            <div class="info-card tip">
+                <div class="card-label">&#128161; نصيحة</div>
+                <p>إذا كنت تستخدم iCloud، بياناتك تتزامن تلقائياً بين أجهزتك بدون الحاجة لتصدير يدوي.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- 11. TIPS -->
+    <!-- ============================== -->
+    <section class="section" id="tips">
+        <div class="section-header">
+            <span class="section-icon">&#128161;</span>
+            <h2>نصائح للمبتدئين</h2>
+        </div>
+
+        <div class="info-card tip">
+            <div class="card-label">&#128161; أنشئ القوالب أولاً</div>
+            <p>قبل ما تبدأ أسبوعك التدريبي، خصص 5 دقائق لإنشاء قوالب لكل يوم تدريب. هذا يوفر عليك وقت كبير كل يوم.</p>
+        </div>
+
+        <div class="info-card tip">
+            <div class="card-label">&#128161; سجّل المجموعة فوراً</div>
+            <p>سجّل كل مجموعة فور انتهائك منها — لا تنتظر نهاية التمرين. بكذا تضمن دقة الأرقام وما تنسى شيء.</p>
+        </div>
+
+        <div class="info-card tip">
+            <div class="card-label">&#128161; استخدم أرقام المرة السابقة</div>
+            <p>المربع الأزرق اللي يعرض أرقام المرة السابقة هو أهم أداة عندك. حاول دائماً إنك ترفع أكثر ولو بمقدار 2.5 كجم أو تكرار واحد زيادة.</p>
+        </div>
+
+        <div class="info-card tip">
+            <div class="card-label">&#128161; استخدم أنواع المجموعات</div>
+            <p>لا تنسى تصنّف مجموعاتك (إحماء، عمل، دروب سيت، فشل عضلي). هذا يعطيك صورة أوضح عن تمرينك في السجل والتحليلات.</p>
+        </div>
+
+        <div class="info-card tip">
+            <div class="card-label">&#128161; راجع تحليلاتك أسبوعياً</div>
+            <p>خصص 5 دقائق في نهاية كل أسبوع لمراجعة تبويب التحليلات. تتبّع تمرين أو اثنين مهمين عندك وتأكد إن الخط صاعد.</p>
+        </div>
+
+        <div class="info-card tip">
+            <div class="card-label">&#128161; احتفظ بنسخة احتياطية</div>
+            <p>كل شهر أو شهرين، صدّر نسخة احتياطية .liftlog من الإعدادات واحفظها في مكان آمن. بياناتك التدريبية ثمينة ولا تقدر بثمن.</p>
+        </div>
+
+        <div class="info-card tip">
+            <div class="card-label">&#128161; استخدم الملاحظات</div>
+            <p>إذا حسيت بألم أو غيّرت تقنية التمرين أو كان عندك ملاحظة مهمة، استخدم حقل الملاحظات. هذه المعلومات تكون قيّمة جداً لما ترجع لها لاحقاً.</p>
+        </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- 12. FAQ -->
+    <!-- ============================== -->
+    <section class="section" id="faq">
+        <div class="section-header">
+            <span class="section-icon">&#10067;</span>
+            <h2>الأسئلة الشائعة</h2>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+                هل أحتاج إنترنت لاستخدام التطبيق؟
+                <span class="arrow">&#9660;</span>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">
+                    لا. التطبيق يعمل بالكامل بدون إنترنت. كل بياناتك مخزنة محلياً على جهازك. الإنترنت مطلوب فقط لمزامنة iCloud إذا كنت تستخدمها بين أجهزة متعددة.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+                إذا طفيت التطبيق أثناء التمرين، هل أفقد بياناتي؟
+                <span class="arrow">&#9660;</span>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">
+                    لا تقلق على الإطلاق. التطبيق يحفظ كل تغيير تلقائياً لحظة بلحظة. إذا أغلقت التطبيق أو انقطعت البطارية، فقط افتح التطبيق مرة ثانية واضغط "متابعة التمرين" من شاشة اليوم.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+                كيف أعرف إني تحسّنت؟
+                <span class="arrow">&#9660;</span>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">
+                    طريقتين: الأولى هي المربع الأزرق في شاشة التمرين اللي يعرض أرقام المرة السابقة — قارن أرقامك الحالية فيها. الثانية هي تبويب التحليلات — اختر أي تمرين وشاهد الرسم البياني، إذا الخط صاعد يعني أنت تتحسّن.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+                ما هو "التحميل التدريجي" (Progressive Overload)؟
+                <span class="arrow">&#9660;</span>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">
+                    هو المبدأ الأساسي في بناء العضلات. يعني إنك كل جلسة تحاول تزيد الحمل على عضلاتك — سواء بزيادة الوزن ولو بمقدار بسيط، أو زيادة عدد التكرارات، أو زيادة عدد المجموعات. التطبيق يساعدك تطبّق هذا المبدأ بعرض أرقام المرة السابقة عشان تعرف هدفك بالضبط.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+                هل يمكنني تعديل تمرين بعد ما أنهيه؟
+                <span class="arrow">&#9660;</span>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">
+                    نعم. اذهب لتبويب "السجل"، اضغط على الجلسة التي تريد تعديلها، ثم اضغط على القائمة (&#8942;) واختر "تعديل". يمكنك تغيير الأوزان والتكرارات وإضافة أو حذف مجموعات.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+                ما الفرق بين تصدير CSV و PDF والنسخة الاحتياطية؟
+                <span class="arrow">&#9660;</span>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">
+                    ملف CSV هو جدول بيانات يمكن فتحه في Excel — مفيد للتحليل المتقدم. ملف PDF هو تقرير جاهز للطباعة أو المشاركة مع مدربك. أما النسخة الاحتياطية .liftlog فهي نسخة كاملة من كل بياناتك يمكنك استعادتها على نفس الجهاز أو جهاز جديد.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+                ما هي مجموعات التمارين (Exercise Groups)؟
+                <span class="arrow">&#9660;</span>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">
+                    مجموعات التمارين تسمح لك بتجميع عدة تمارين تحت عنوان واحد. مفيدة جداً لتنظيم السوبر سيت (تمرينين متتاليين بدون راحة) أو لتجميع تمارين عضلة واحدة. تنشئها من شاشة تعديل القالب بالضغط على "إضافة مجموعة تمارين".
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+                كيف أغيّر لغة التطبيق؟
+                <span class="arrow">&#9660;</span>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">
+                    من تبويب "الإعدادات"، في قسم اللغة، اضغط على اللغة التي تريدها (English أو العربية). سيُغلق التطبيق ويعاد فتحه باللغة الجديدة مع دعم كامل لاتجاه الكتابة.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+                ما معنى شارة "BW" على التمرين؟
+                <span class="arrow">&#9660;</span>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">
+                    BW تعني Bodyweight أي "وزن الجسم". عند تفعيل هذه الشارة على تمرين (مثل العقلة أو الضغط)، يختفي عمود الوزن ويبقى فقط حقل التكرارات. يمكنك تفعيلها بالضغط المطول على بطاقة التمرين واختيار "تبديل وزن الجسم".
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+                هل بياناتي آمنة؟
+                <span class="arrow">&#9660;</span>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">
+                    نعم. كل بياناتك مخزنة محلياً على جهازك ولا تُرسل لأي خادم خارجي. إذا فعّلت مزامنة iCloud، فالبيانات تنتقل عبر خوادم Apple المشفرة فقط. وننصحك دائماً بتصدير نسخة احتياطية بشكل دوري كإجراء إضافي.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">
+        <img src="app_icon.png" alt="LiftLog" style="width: 48px; height: 48px; border-radius: 12px; margin-bottom: 10px;">
+        <div class="footer-brand">LiftLog</div>
+        <p>LIFT &middot; LOG &middot; GROW</p>
+        <p style="margin-top: 8px; font-size: 13px;">دليل المستخدم &mdash; الإصدار 1.0</p>
+    </div>
+
+</main>
+</div>
+
+<!-- Scroll to Top -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#9650;</button>
+
+<script>
+    // Theme toggle
+    function toggleTheme() {
+        const body = document.body;
+        const btn = document.getElementById('themeBtn');
+        if (body.getAttribute('data-theme') === 'light') {
+            body.removeAttribute('data-theme');
+            btn.textContent = 'الوضع الفاتح';
+        } else {
+            body.setAttribute('data-theme', 'light');
+            btn.textContent = 'الوضع الداكن';
+        }
+    }
+
+    // Mobile sidebar toggle
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('mobile-open');
+    }
+
+    // Close sidebar on link click (mobile)
+    document.querySelectorAll('.toc-list a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.getElementById('sidebar').classList.remove('mobile-open');
+        });
+    });
+
+    // FAQ toggle
+    function toggleFaq(btn) {
+        const item = btn.parentElement;
+        item.classList.toggle('open');
+    }
+
+    // Scroll to top button visibility
+    window.addEventListener('scroll', () => {
+        const btn = document.getElementById('scrollTop');
+        if (window.scrollY > 400) {
+            btn.classList.add('visible');
+        } else {
+            btn.classList.remove('visible');
+        }
+    });
+
+    // Active TOC highlight
+    const sections = document.querySelectorAll('.section, .subsection[id]');
+    const tocLinks = document.querySelectorAll('.toc-list a');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                tocLinks.forEach(link => link.classList.remove('active'));
+                const activeLink = document.querySelector(`.toc-list a[href="#${entry.target.id}"]`);
+                if (activeLink) activeLink.classList.add('active');
+            }
+        });
+    }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+
+    sections.forEach(section => {
+        if (section.id) observer.observe(section);
+    });
+</script>
+
+</body>
+</html>
