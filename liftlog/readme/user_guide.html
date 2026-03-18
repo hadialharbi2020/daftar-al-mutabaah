@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LiftLog - دليل المستخدم</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
+
+<div class="reading-progress" id="readingProgress"></div>
 
 <nav class="nav">
     <div class="nav-inner">
@@ -52,49 +55,69 @@
         <p class="hero-tagline">LIFT &middot; LOG &middot; GROW</p>
     </div>
 
+    <!-- Quick Start -->
+    <div class="quick-start" id="quick-start">
+        <h2><span data-i18n="qsTitle">بداية سريعة</span></h2>
+        <div class="qs-steps">
+            <div class="qs-step"><div class="qs-num">1</div><h4 data-i18n="qs1t">أنشئ قالب</h4><p data-i18n="qs1d">من تبويب القوالب، اضغط + وأضف تمارينك</p></div>
+            <div class="qs-step"><div class="qs-num">2</div><h4 data-i18n="qs2t">ابدأ التمرين</h4><p data-i18n="qs2d">من شاشة اليوم، اضغط "بدء التمرين" واختر القالب</p></div>
+            <div class="qs-step"><div class="qs-num">3</div><h4 data-i18n="qs3t">سجّل أرقامك</h4><p data-i18n="qs3d">أدخل الوزن والتكرارات واضغط بعد كل مجموعة</p></div>
+            <div class="qs-step"><div class="qs-num">4</div><h4 data-i18n="qs4t">تابع تقدّمك</h4><p data-i18n="qs4d">في المرة القادمة سترى أرقامك السابقة تلقائياً</p></div>
+        </div>
+    </div>
+
+    <!-- Search -->
+    <div class="search-box">
+        <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="ابحث في الدليل..." oninput="handleSearch(this.value)">
+        <span class="search-icon"></span>
+    </div>
+    <div class="search-no-results" id="searchNoResults" data-i18n="searchNoResults">لا توجد نتائج مطابقة</div>
+
     <section class="section" id="intro">
-        <div class="section-header"><span class="section-icon">&#128218;</span><h2 data-i18n="s1Title">ما هو LiftLog؟</h2></div>
+        <div class="section-header"><i data-lucide="book-open" class="section-icon"></i><h2 data-i18n="s1Title">ما هو LiftLog؟</h2></div>
         <p data-i18n="s1Desc">LiftLog هو تطبيق مصمم خصيصاً للاعبي كمال الأجسام ورفع الأثقال. يحوّل تجربة الدفتر والقلم التقليدية إلى تجربة رقمية سريعة واحترافية. الفكرة بسيطة: تسجّل تمارينك بسرعة، وفي كل مرة ترجع للتمرين، يعرض لك التطبيق أرقام المرة اللي قبلها عشان تعرف هدفك وتتحسّن.</p>
         <div class="feature-grid">
-            <div class="feature-item"><div class="fi-icon">&#9889;</div><h4 data-i18n="f1t">تسجيل سريع</h4><p data-i18n="f1d">سجّل الوزن والتكرارات في ثوانٍ معدودة</p></div>
-            <div class="feature-item"><div class="fi-icon">&#128200;</div><h4 data-i18n="f2t">تتبّع التقدّم</h4><p data-i18n="f2d">رسوم بيانية توضح تطوّرك عبر الزمن</p></div>
-            <div class="feature-item"><div class="fi-icon">&#128203;</div><h4 data-i18n="f3t">قوالب ذكية</h4><p data-i18n="f3d">أنشئ قالب مرة واحدة واستخدمه كل أسبوع</p></div>
-            <div class="feature-item"><div class="fi-icon">&#128274;</div><h4 data-i18n="f4t">بدون إنترنت</h4><p data-i18n="f4d">كل بياناتك محفوظة محلياً على جهازك</p></div>
-            <div class="feature-item"><div class="fi-icon">&#127760;</div><h4 data-i18n="f5t">عربي وإنجليزي</h4><p data-i18n="f5d">واجهة كاملة باللغتين مع دعم RTL</p></div>
-            <div class="feature-item"><div class="fi-icon">&#9729;&#65039;</div><h4 data-i18n="f6t">مزامنة iCloud</h4><p data-i18n="f6d">بياناتك تنتقل معك لأي جهاز آبل</p></div>
+            <div class="feature-item"><div class="fi-icon"><i data-lucide="zap"></i></div><h4 data-i18n="f1t">تسجيل سريع</h4><p data-i18n="f1d">سجّل الوزن والتكرارات في ثوانٍ معدودة</p></div>
+            <div class="feature-item"><div class="fi-icon"><i data-lucide="trending-up"></i></div><h4 data-i18n="f2t">تتبّع التقدّم</h4><p data-i18n="f2d">رسوم بيانية توضح تطوّرك عبر الزمن</p></div>
+            <div class="feature-item"><div class="fi-icon"><i data-lucide="copy"></i></div><h4 data-i18n="f3t">قوالب ذكية</h4><p data-i18n="f3d">أنشئ قالب مرة واحدة واستخدمه كل أسبوع</p></div>
+            <div class="feature-item"><div class="fi-icon"><i data-lucide="wifi-off"></i></div><h4 data-i18n="f4t">بدون إنترنت</h4><p data-i18n="f4d">كل بياناتك محفوظة محلياً على جهازك</p></div>
+            <div class="feature-item"><div class="fi-icon"><i data-lucide="languages"></i></div><h4 data-i18n="f5t">عربي وإنجليزي</h4><p data-i18n="f5d">واجهة كاملة باللغتين مع دعم RTL</p></div>
+            <div class="feature-item"><div class="fi-icon"><i data-lucide="cloud"></i></div><h4 data-i18n="f6t">مزامنة iCloud</h4><p data-i18n="f6d">بياناتك تنتقل معك لأي جهاز آبل</p></div>
         </div>
     </section>
 
     <section class="section" id="first-open">
-        <div class="section-header"><span class="section-icon">&#128241;</span><h2 data-i18n="s2Title">فتح التطبيق لأول مرة</h2></div>
+        <div class="section-header"><i data-lucide="smartphone" class="section-icon"></i><h2 data-i18n="s2Title">فتح التطبيق لأول مرة</h2></div>
         <p data-i18n="s2Desc">عند فتح التطبيق لأول مرة، ستمر بشاشات ترحيبية تعريفية تشرح لك أهم ميزات التطبيق. هذه الشاشات تظهر مرة واحدة فقط.</p>
-        <div class="subsection"><h3>&#127775; <span data-i18n="s2h3">شاشات الترحيب</span></h3>
+        <div class="screenshot-wrap"><img loading="lazy" src="screenshots/splash.png" alt="Splash Screen"><p class="caption" data-i18n="capSplash">شاشة البداية</p></div>
+        <div class="subsection"><h3><span data-i18n="s2h3">شاشات الترحيب</span></h3>
             <ol class="steps">
                 <li data-i18n="s2s1">شاشة ترحيبية مع شعار LiftLog المتحرك وعبارة "LIFT. LOG. GROW."</li>
                 <li data-i18n="s2s2">ثلاث شاشات تعرض أهم مميزات التطبيق: التسجيل السريع، تتبّع التقدّم، والقوالب الجاهزة</li>
                 <li data-i18n="s2s3">ثلاث شاشات توضّح المشاكل التي يحلها التطبيق مقارنة بالدفتر الورقي</li>
                 <li data-i18n="s2s4">شاشة عرض اشتراك Pro (يمكنك تخطيها إذا أردت استخدام النسخة المجانية)</li>
             </ol>
-            <div class="info-card tip"><div class="card-label">&#128161; <span data-i18n="tipLabel">نصيحة</span></div><p data-i18n="s2tip">بعد انتهاء شاشات الترحيب، ستنتقل مباشرة إلى الشاشة الرئيسية وتبدأ باستخدام التطبيق فوراً.</p></div>
+            <div class="info-card tip"><div class="card-label"><i data-lucide="lightbulb" class="card-icon"></i> <span data-i18n="tipLabel">نصيحة</span></div><p data-i18n="s2tip">بعد انتهاء شاشات الترحيب، ستنتقل مباشرة إلى الشاشة الرئيسية وتبدأ باستخدام التطبيق فوراً.</p></div>
         </div>
     </section>
 
     <section class="section" id="main-tabs">
-        <div class="section-header"><span class="section-icon">&#128736;</span><h2 data-i18n="s3Title">الشاشات الرئيسية</h2></div>
+        <div class="section-header"><i data-lucide="layout-grid" class="section-icon"></i><h2 data-i18n="s3Title">الشاشات الرئيسية</h2></div>
         <p data-i18n="s3Desc">التطبيق مقسّم إلى خمسة أقسام رئيسية تصل إليها من شريط التبويب في أسفل الشاشة:</p>
         <div class="tab-bar">
-            <div class="tab-bar-item active">&#128293; <span data-i18n="tabToday">اليوم</span></div>
-            <div class="tab-bar-item">&#128197; <span data-i18n="tabHistory">السجل</span></div>
-            <div class="tab-bar-item">&#128203; <span data-i18n="tabTemplates">القوالب</span></div>
-            <div class="tab-bar-item">&#128200; <span data-i18n="tabAnalytics">التحليلات</span></div>
-            <div class="tab-bar-item">&#9881;&#65039; <span data-i18n="tabSettings">الإعدادات</span></div>
+            <div class="tab-bar-item active"><span data-i18n="tabToday">اليوم</span></div>
+            <div class="tab-bar-item"><span data-i18n="tabHistory">السجل</span></div>
+            <div class="tab-bar-item"><span data-i18n="tabTemplates">القوالب</span></div>
+            <div class="tab-bar-item"><span data-i18n="tabAnalytics">التحليلات</span></div>
+            <div class="tab-bar-item"><span data-i18n="tabSettings">الإعدادات</span></div>
         </div>
 
         <div class="subsection" id="tab-today">
-            <h3>&#128293; <span data-i18n="s3t1h">تبويب "اليوم"</span></h3>
+            <h3><span data-i18n="s3t1h">تبويب "اليوم"</span></h3>
             <p data-i18n="s3t1d">هذه الشاشة الرئيسية التي تراها عند فتح التطبيق. مصممة عشان تبدأ تمرينك بأسرع وقت ممكن.</p>
+            <div class="screenshot-wrap"><img loading="lazy" src="screenshots/today.png" alt="Today Tab"><p class="caption" data-i18n="capToday">شاشة اليوم</p></div>
             <p><strong data-i18n="s3t1l1">ما الذي تراه في هذه الشاشة:</strong></p>
-            <div class="info-card"><p data-i18n="s3t1c1"><strong>&#128197; التاريخ:</strong> يظهر تاريخ اليوم الحالي في الأعلى (مثلاً: "الثلاثاء، 18 مارس").</p><p data-i18n="s3t1c2"><strong>&#128203; قالب اليوم:</strong> إذا كان عندك قالب مربوط بيوم اليوم، يظهر اسمه تلقائياً. وإذا ما كان فيه قالب، تظهر رسالة "لا يوجد قالب لهذا اليوم".</p><p data-i18n="s3t1c3"><strong>&#9654;&#65039; زر بدء التمرين:</strong> زر كبير وواضح يبدأ جلسة تمرين جديدة.</p><p data-i18n="s3t1c4"><strong>&#128260; زر متابعة التمرين:</strong> إذا كان عندك تمرين ما انتهى بعد من اليوم، يظهر زر "متابعة التمرين" بدل "بدء التمرين".</p><p style="margin-bottom:0" data-i18n="s3t1c5"><strong>&#128202; رسم تكرار أسبوعي:</strong> رسم بياني يعرض عدد التمارين التي أديتها في كل أسبوع خلال آخر 8 أسابيع.</p></div>
+            <div class="info-card"><p data-i18n="s3t1c1"><strong>التاريخ:</strong> يظهر تاريخ اليوم الحالي في الأعلى (مثلاً: "الثلاثاء، 18 مارس").</p><p data-i18n="s3t1c2"><strong>قالب اليوم:</strong> إذا كان عندك قالب مربوط بيوم اليوم، يظهر اسمه تلقائياً. وإذا ما كان فيه قالب، تظهر رسالة "لا يوجد قالب لهذا اليوم".</p><p data-i18n="s3t1c3"><strong>زر بدء التمرين:</strong> زر كبير وواضح يبدأ جلسة تمرين جديدة.</p><p data-i18n="s3t1c4"><strong>زر متابعة التمرين:</strong> إذا كان عندك تمرين ما انتهى بعد من اليوم، يظهر زر "متابعة التمرين" بدل "بدء التمرين".</p><p style="margin-bottom:0" data-i18n="s3t1c5"><strong>رسم تكرار أسبوعي:</strong> رسم بياني يعرض عدد التمارين التي أديتها في كل أسبوع خلال آخر 8 أسابيع.</p></div>
             <p><strong data-i18n="s3t1l2">كيف تبدأ تمرينك:</strong></p>
             <ol class="steps">
                 <li data-i18n="s3t1st1">اضغط على زر <strong>"بدء التمرين"</strong></li>
@@ -105,9 +128,10 @@
         </div>
 
         <div class="subsection" id="tab-history">
-            <h3>&#128197; <span data-i18n="s3t2h">تبويب "السجل"</span></h3>
+            <h3><span data-i18n="s3t2h">تبويب "السجل"</span></h3>
             <p data-i18n="s3t2d">هنا تجد سجل كل تمارينك السابقة مرتبة حسب التاريخ ومجمّعة حسب الشهر.</p>
-            <div class="info-card"><p data-i18n="s3t2c1"><strong>&#128269; البحث:</strong> في أعلى الشاشة يوجد حقل بحث يمكنك من خلاله البحث باسم التمرين أو التاريخ أو ملاحظات الجلسة.</p><p data-i18n="s3t2c2"><strong>&#128197; التجميع الشهري:</strong> التمارين مجمّعة حسب الشهر والسنة (مثلاً: "مارس 2026")، والأحدث يظهر أولاً.</p><p style="margin-bottom:0" data-i18n="s3t2c3"><strong>&#128196; بطاقة كل جلسة:</strong> تعرض تاريخ الجلسة، أسماء التمارين، وإحصائيات سريعة (عدد التمارين، عدد المجموعات، الحجم الكلي بالكيلو، المدة).</p></div>
+            <div class="info-card"><p data-i18n="s3t2c1"><strong>البحث:</strong> في أعلى الشاشة يوجد حقل بحث يمكنك من خلاله البحث باسم التمرين أو التاريخ أو ملاحظات الجلسة.</p><p data-i18n="s3t2c2"><strong>التجميع الشهري:</strong> التمارين مجمّعة حسب الشهر والسنة (مثلاً: "مارس 2026")، والأحدث يظهر أولاً.</p><p style="margin-bottom:0" data-i18n="s3t2c3"><strong>بطاقة كل جلسة:</strong> تعرض تاريخ الجلسة، أسماء التمارين، وإحصائيات سريعة (عدد التمارين، عدد المجموعات، الحجم الكلي بالكيلو، المدة).</p></div>
+            <div class="screenshot-wrap"><img loading="lazy" src="screenshots/history.png" alt="History Tab"><p class="caption" data-i18n="capHistory">شاشة السجل</p></div>
             <p><strong data-i18n="s3t2l">ما يمكنك فعله:</strong></p>
             <ol class="steps">
                 <li data-i18n="s3t2s1"><strong>عرض التفاصيل:</strong> اضغط على أي جلسة لرؤية كل التمارين والمجموعات بالتفصيل</li>
@@ -119,7 +143,7 @@
         </div>
 
         <div class="subsection" id="tab-templates">
-            <h3>&#128203; <span data-i18n="s3t3h">تبويب "القوالب"</span></h3>
+            <h3><span data-i18n="s3t3h">تبويب "القوالب"</span></h3>
             <p data-i18n="s3t3d">القوالب هي الطريقة الذكية لتسريع بدء تمارينك. بدل ما تضيف التمارين يدوياً كل مرة، تنشئ قالب مرة واحدة وتستخدمه كل أسبوع.</p>
             <p><strong data-i18n="s3t3l1">إنشاء قالب جديد:</strong></p>
             <ol class="steps">
@@ -127,13 +151,14 @@
                 <li data-i18n="s3t3s2">أدخل اسم القالب (مثلاً: "يوم الصدر والباي")</li>
                 <li data-i18n="s3t3s3">ستنتقل لشاشة تعديل القالب حيث يمكنك إضافة التمارين</li>
             </ol>
+            <div class="screenshot-wrap"><img loading="lazy" src="screenshots/templates.png" alt="Templates Tab"><p class="caption" data-i18n="capTemplates">شاشة القوالب</p></div>
             <p><strong data-i18n="s3t3l2">تعديل القالب:</strong></p>
-            <div class="info-card"><p data-i18n="s3t3c1"><strong>&#9999;&#65039; اسم القالب:</strong> يمكنك تعديل الاسم في أي وقت من خانة الاسم في أعلى الصفحة.</p><p data-i18n="s3t3c2"><strong>&#128197; ربط بيوم:</strong> اختر يوم من أيام الأسبوع (الأحد إلى السبت) لربط القالب به. عندما يأتي ذلك اليوم، يظهر القالب تلقائياً في شاشة "اليوم".</p><p data-i18n="s3t3c3"><strong>&#10133; إضافة تمرين:</strong> اضغط "إضافة تمرين" لإضافة تمرين مفرد، أو "إضافة مجموعة تمارين" لإنشاء مجموعة فيها عدة تمارين فرعية.</p><p style="margin-bottom:0" data-i18n="s3t3c4"><strong>&#128290; عدد المجموعات:</strong> لكل تمرين يمكنك تحديد عدد المجموعات الافتراضي (من 1 إلى 10) باستخدام أزرار + و -.</p></div>
-            <div class="info-card tip"><div class="card-label">&#128161; <span data-i18n="tipLabel">نصيحة</span></div><p data-i18n="s3t3tip">يمكنك تجربة التطبيق بسرعة عبر الضغط على قائمة "بيانات تجريبية" واختيار "قوالب تجريبية" — سيضيف التطبيق قوالب جاهزة يمكنك التعديل عليها.</p></div>
+            <div class="info-card"><p data-i18n="s3t3c1"><strong>اسم القالب:</strong> يمكنك تعديل الاسم في أي وقت من خانة الاسم في أعلى الصفحة.</p><p data-i18n="s3t3c2"><strong>ربط بيوم:</strong> اختر يوم من أيام الأسبوع (الأحد إلى السبت) لربط القالب به. عندما يأتي ذلك اليوم، يظهر القالب تلقائياً في شاشة "اليوم".</p><p data-i18n="s3t3c3"><strong>إضافة تمرين:</strong> اضغط "إضافة تمرين" لإضافة تمرين مفرد، أو "إضافة مجموعة تمارين" لإنشاء مجموعة فيها عدة تمارين فرعية.</p><p style="margin-bottom:0" data-i18n="s3t3c4"><strong>عدد المجموعات:</strong> لكل تمرين يمكنك تحديد عدد المجموعات الافتراضي (من 1 إلى 10) باستخدام أزرار + و -.</p></div>
+            <div class="info-card tip"><div class="card-label"><i data-lucide="lightbulb" class="card-icon"></i> <span data-i18n="tipLabel">نصيحة</span></div><p data-i18n="s3t3tip">يمكنك تجربة التطبيق بسرعة عبر الضغط على قائمة "بيانات تجريبية" واختيار "قوالب تجريبية" — سيضيف التطبيق قوالب جاهزة يمكنك التعديل عليها.</p></div>
         </div>
 
         <div class="subsection" id="tab-analytics">
-            <h3>&#128200; <span data-i18n="s3t4h">تبويب "التحليلات"</span></h3>
+            <h3><span data-i18n="s3t4h">تبويب "التحليلات"</span></h3>
             <p data-i18n="s3t4d">هنا تشاهد تقدّمك بصرياً عبر رسوم بيانية تفاعلية تغطي كل تمرين تؤديه.</p>
             <p data-i18n="s3t4l1"><strong>النطاق الزمني:</strong> في أعلى الشاشة تجد أربعة أزرار للتحكم بالفترة الزمنية المعروضة:</p>
             <div class="tab-bar" style="max-width:400px;">
@@ -142,61 +167,63 @@
                 <div class="tab-bar-item" data-i18n="tr6m">6 أشهر</div>
                 <div class="tab-bar-item" data-i18n="tr1y">سنة</div>
             </div>
+            <div class="screenshot-wrap"><img loading="lazy" src="screenshots/analytics.png" alt="Analytics Tab"><p class="caption" data-i18n="capAnalytics">شاشة التحليلات</p></div>
             <p data-i18n="s3t4p2"><strong>الإحصائيات العامة:</strong> ثلاث بطاقات تعرض عدد التمارين الكلي وعدد التمارين وعدد المجموعات خلال الفترة المحددة.</p>
             <p data-i18n="s3t4p3"><strong>رسم التكرار الأسبوعي:</strong> رسم بياني بأعمدة يعرض كم مرة تدرّبت في كل أسبوع.</p>
             <p data-i18n="s3t4p4"><strong>اختيار التمرين:</strong> قائمة أفقية قابلة للتمرير فيها كل أسماء التمارين المحفوظة. اضغط على أي تمرين لعرض الرسوم البيانية الخاصة به:</p>
-            <div class="info-card"><p data-i18n="s3t4c1"><strong>&#128200; رسم تطوّر الوزن:</strong> يعرض أقصى وزن رفعته في كل جلسة عبر الزمن. يظهر خط متقطع عند الرقم القياسي، والنقاط الذهبية تشير للجلسات التي حققت فيها أو تجاوزت رقمك القياسي.</p><p data-i18n="s3t4c2"><strong>&#128202; رسم الحجم الكلي:</strong> يعرض إجمالي الحجم (الوزن × التكرارات) لكل جلسة، وهو مؤشر ممتاز على شدة التمرين.</p><p data-i18n="s3t4c3"><strong>&#128201; رسم التكرارات:</strong> يعرض إجمالي التكرارات لكل جلسة.</p><p style="margin-bottom:0" data-i18n="s3t4c4"><strong>&#127942; إحصائيات التمرين:</strong> أربع بطاقات تعرض أفضل وزن، متوسط الوزن، الحجم الكلي، وعدد الجلسات.</p></div>
+            <div class="info-card"><p data-i18n="s3t4c1"><strong>رسم تطوّر الوزن:</strong> يعرض أقصى وزن رفعته في كل جلسة عبر الزمن. يظهر خط متقطع عند الرقم القياسي، والنقاط الذهبية تشير للجلسات التي حققت فيها أو تجاوزت رقمك القياسي.</p><p data-i18n="s3t4c2"><strong>رسم الحجم الكلي:</strong> يعرض إجمالي الحجم (الوزن × التكرارات) لكل جلسة، وهو مؤشر ممتاز على شدة التمرين.</p><p data-i18n="s3t4c3"><strong>رسم التكرارات:</strong> يعرض إجمالي التكرارات لكل جلسة.</p><p style="margin-bottom:0" data-i18n="s3t4c4"><strong>إحصائيات التمرين:</strong> أربع بطاقات تعرض أفضل وزن، متوسط الوزن، الحجم الكلي، وعدد الجلسات.</p></div>
         </div>
 
         <div class="subsection" id="tab-settings">
-            <h3>&#9881;&#65039; <span data-i18n="s3t5h">تبويب "الإعدادات"</span></h3>
+            <h3><span data-i18n="s3t5h">تبويب "الإعدادات"</span></h3>
             <p data-i18n="s3t5d">من هنا تتحكم بإعدادات التطبيق، اللغة، الاشتراك، وتصدير واستيراد البيانات.</p>
-            <div class="info-card"><p data-i18n="s3t5c1"><strong>&#128081; الاشتراك:</strong> إذا كنت مشتركاً في Pro، يظهر حالة الاشتراك وتاريخ التجديد. وإذا لم تكن مشتركاً، يظهر زر "ترقية إلى Pro" وزر "استعادة المشتريات".</p><p data-i18n="s3t5c2"><strong>&#127760; اللغة:</strong> اختر بين العربية والإنجليزية. عند تغيير اللغة، سيُغلق التطبيق ويعاد فتحه باللغة الجديدة.</p><p data-i18n="s3t5c3"><strong>&#128228; تصدير البيانات:</strong> ثلاثة خيارات للتصدير — ملف CSV، ملف PDF، أو نسخة احتياطية كاملة بصيغة .liftlog.</p><p data-i18n="s3t5c4"><strong>&#128229; استيراد البيانات:</strong> استيراد من ملف CSV أو استعادة من نسخة احتياطية .liftlog.</p><p style="margin-bottom:0" data-i18n="s3t5c5"><strong>&#128465;&#65039; إدارة البيانات:</strong> خيار "أرشفة وحذف" يصدّر بياناتك كـ CSV ثم يحذفها، و"حذف كل البيانات" يحذف كل شيء نهائياً.</p></div>
-            <div class="info-card warning"><div class="card-label">&#9888;&#65039; <span data-i18n="warnLabel">تنبيه</span></div><p data-i18n="s3t5warn">حذف البيانات عملية لا يمكن التراجع عنها. تأكد من تصدير نسخة احتياطية قبل الحذف.</p></div>
+            <div class="info-card"><p data-i18n="s3t5c1"><strong>الاشتراك:</strong> إذا كنت مشتركاً في Pro، يظهر حالة الاشتراك وتاريخ التجديد. وإذا لم تكن مشتركاً، يظهر زر "ترقية إلى Pro" وزر "استعادة المشتريات".</p><p data-i18n="s3t5c2"><strong>اللغة:</strong> اختر بين العربية والإنجليزية. عند تغيير اللغة، سيُغلق التطبيق ويعاد فتحه باللغة الجديدة.</p><p data-i18n="s3t5c3"><strong>تصدير البيانات:</strong> ثلاثة خيارات للتصدير — ملف CSV، ملف PDF، أو نسخة احتياطية كاملة بصيغة .liftlog.</p><p data-i18n="s3t5c4"><strong>استيراد البيانات:</strong> استيراد من ملف CSV أو استعادة من نسخة احتياطية .liftlog.</p><p style="margin-bottom:0" data-i18n="s3t5c5"><strong>إدارة البيانات:</strong> خيار "أرشفة وحذف" يصدّر بياناتك كـ CSV ثم يحذفها، و"حذف كل البيانات" يحذف كل شيء نهائياً.</p></div>
+            <div class="info-card warning"><div class="card-label"><i data-lucide="alert-triangle" class="card-icon"></i> <span data-i18n="warnLabel">تنبيه</span></div><p data-i18n="s3t5warn">حذف البيانات عملية لا يمكن التراجع عنها. تأكد من تصدير نسخة احتياطية قبل الحذف.</p></div>
         </div>
     </section>
 
     <section class="section" id="active-workout">
-        <div class="section-header"><span class="section-icon">&#127947;</span><h2 data-i18n="s4Title">تسجيل التمرين (الشاشة الأساسية)</h2></div>
+        <div class="section-header"><i data-lucide="dumbbell" class="section-icon"></i><h2 data-i18n="s4Title">تسجيل التمرين (الشاشة الأساسية)</h2></div>
         <p data-i18n="s4Desc">هذه هي الشاشة الأهم في التطبيق — هنا تسجّل أوزانك وتكراراتك أثناء التمرين. مصممة لتكون سريعة وعملية حتى بيد واحدة.</p>
-        <div class="subsection"><h3>&#128296; <span data-i18n="s4h1">أجزاء الشاشة</span></h3>
-            <div class="info-card"><p data-i18n="s4c1"><strong>&#128281; الشريط العلوي:</strong> يحتوي زر الرجوع على اليمين، تاريخ التمرين في المنتصف، وزر الملاحظات وزر "إنهاء" على اليسار.</p><p data-i18n="s4c2"><strong>&#128221; الملاحظات:</strong> اضغط أيقونة الملاحظات في الشريط العلوي لإظهار حقل نص يمكنك فيه كتابة ملاحظات عن الجلسة (مثلاً: "تمرين خفيف بعد إصابة").</p><p data-i18n="s4c3"><strong>&#127947; بطاقات التمارين:</strong> كل تمرين يظهر في بطاقة منفصلة فيها اسم التمرين، أرقام الجلسة السابقة، وصفوف المجموعات.</p><p style="margin-bottom:0" data-i18n="s4c4"><strong>&#10133; إضافة تمرين:</strong> في أسفل القائمة يوجد زر كبير "+ إضافة تمرين" يفتح شاشة البحث والإضافة.</p></div>
+        <div class="subsection"><h3><span data-i18n="s4h1">أجزاء الشاشة</span></h3>
+            <div class="info-card"><p data-i18n="s4c1"><strong>الشريط العلوي:</strong> يحتوي زر الرجوع على اليمين، تاريخ التمرين في المنتصف، وزر الملاحظات وزر "إنهاء" على اليسار.</p><p data-i18n="s4c2"><strong>الملاحظات:</strong> اضغط أيقونة الملاحظات في الشريط العلوي لإظهار حقل نص يمكنك فيه كتابة ملاحظات عن الجلسة (مثلاً: "تمرين خفيف بعد إصابة").</p><p data-i18n="s4c3"><strong>بطاقات التمارين:</strong> كل تمرين يظهر في بطاقة منفصلة فيها اسم التمرين، أرقام الجلسة السابقة، وصفوف المجموعات.</p><p style="margin-bottom:0" data-i18n="s4c4"><strong>إضافة تمرين:</strong> في أسفل القائمة يوجد زر كبير "+ إضافة تمرين" يفتح شاشة البحث والإضافة.</p></div>
+            <div class="screenshot-wrap"><img loading="lazy" src="screenshots/workout.png" alt="Active Workout"><p class="caption" data-i18n="capWorkout">شاشة تسجيل التمرين</p></div>
         </div>
-        <div class="subsection"><h3>&#127947; <span data-i18n="s4h2">إضافة تمرين جديد</span></h3>
+        <div class="subsection"><h3><span data-i18n="s4h2">إضافة تمرين جديد</span></h3>
             <ol class="steps">
                 <li data-i18n="s4as1">اضغط على <strong>"+ إضافة تمرين"</strong> في أسفل الشاشة</li>
                 <li data-i18n="s4as2">اكتب اسم التمرين (مثلاً: "بنش بريس" أو "Bench Press")</li>
                 <li data-i18n="s4as3">إذا سبق وأدخلت هذا التمرين، سيظهر في قائمة الاقتراحات — اضغط عليه مباشرة</li>
                 <li data-i18n="s4as4">أو اضغط زر "إضافة" لإضافة تمرين بالاسم الذي كتبته</li>
             </ol>
-            <div class="info-card tip"><div class="card-label">&#128161; <span data-i18n="tipLabel">نصيحة</span></div><p data-i18n="s4atip">التطبيق يحفظ أسماء التمارين تلقائياً. في المرة القادمة، مجرد ما تبدأ بكتابة الاسم، ستظهر الاقتراحات فوراً.</p></div>
+            <div class="info-card tip"><div class="card-label"><i data-lucide="lightbulb" class="card-icon"></i> <span data-i18n="tipLabel">نصيحة</span></div><p data-i18n="s4atip">التطبيق يحفظ أسماء التمارين تلقائياً. في المرة القادمة، مجرد ما تبدأ بكتابة الاسم، ستظهر الاقتراحات فوراً.</p></div>
         </div>
-        <div class="subsection"><h3>&#128221; <span data-i18n="s4h3">تسجيل المجموعات (Sets)</span></h3>
+        <div class="subsection"><h3><span data-i18n="s4h3">تسجيل المجموعات (Sets)</span></h3>
             <p data-i18n="s4sp">كل تمرين فيه صفوف مجموعات. كل صف يحتوي على:</p>
-            <div class="info-card"><p data-i18n="s4sc1"><strong>&#128290; رقم المجموعة:</strong> يظهر على اليمين (S1, S2, S3...).</p><p data-i18n="s4sc2"><strong>&#9878;&#65039; الوزن:</strong> حقل رقمي مع أزرار <kbd>-2.5</kbd> و <kbd>+2.5</kbd> لتعديل الوزن بخطوات 2.5 كجم. يمكنك أيضاً الكتابة مباشرة في الحقل.</p><p data-i18n="s4sc3"><strong>&#128260; التكرارات:</strong> حقل رقمي مع أزرار <kbd>-1</kbd> و <kbd>+1</kbd> لتعديل عدد التكرارات.</p><p style="margin-bottom:0" data-i18n="s4sc4"><strong>&#9989; زر الإتمام:</strong> دائرة على اليسار — اضغط عليها لتسجيل إتمام المجموعة (تتحول لعلامة صح خضراء). ستشعر باهتزاز خفيف كتأكيد.</p></div>
+            <div class="info-card"><p data-i18n="s4sc1"><strong>رقم المجموعة:</strong> يظهر على اليمين (S1, S2, S3...).</p><p data-i18n="s4sc2"><strong>الوزن:</strong> حقل رقمي مع أزرار <kbd>-2.5</kbd> و <kbd>+2.5</kbd> لتعديل الوزن بخطوات 2.5 كجم. يمكنك أيضاً الكتابة مباشرة في الحقل.</p><p data-i18n="s4sc3"><strong>التكرارات:</strong> حقل رقمي مع أزرار <kbd>-1</kbd> و <kbd>+1</kbd> لتعديل عدد التكرارات.</p><p style="margin-bottom:0" data-i18n="s4sc4"><strong>زر الإتمام:</strong> دائرة على اليسار — اضغط عليها لتسجيل إتمام المجموعة (تتحول لعلامة صح خضراء). ستشعر باهتزاز خفيف كتأكيد.</p></div>
             <p><strong data-i18n="s4sl">إضافة وإزالة المجموعات:</strong></p>
             <ol class="steps">
                 <li data-i18n="s4ss1">اضغط <strong>"إضافة مجموعة"</strong> أسفل المجموعات لإضافة مجموعة جديدة</li>
                 <li data-i18n="s4ss2">اضغط <strong>"إزالة مجموعة"</strong> لحذف آخر مجموعة (الزر يكون باللون الأحمر)</li>
             </ol>
         </div>
-        <div class="subsection"><h3>&#128467;&#65039; <span data-i18n="s4h4">التحكم بالتمرين</span></h3>
+        <div class="subsection"><h3><span data-i18n="s4h4">التحكم بالتمرين</span></h3>
             <p data-i18n="s4cp">اضغط مطولاً على بطاقة التمرين لتظهر قائمة الخيارات:</p>
-            <div class="info-card"><p data-i18n="s4cc1"><strong>&#11014;&#65039; تحريك للأعلى / &#11015;&#65039; للأسفل:</strong> لتغيير ترتيب التمارين في الجلسة.</p><p data-i18n="s4cc2"><strong>&#128221; إظهار/إخفاء الملاحظات:</strong> لإضافة ملاحظة خاصة بهذا التمرين تحديداً.</p><p data-i18n="s4cc3"><strong>&#127947; تبديل وزن الجسم:</strong> لتمارين وزن الجسم (مثل العقلة) — يخفي عمود الوزن ويظهر شارة <span class="badge badge-bw">BW</span>.</p><p style="margin-bottom:0" data-i18n="s4cc4"><strong>&#128465;&#65039; حذف التمرين:</strong> لإزالة التمرين من الجلسة.</p></div>
+            <div class="info-card"><p data-i18n="s4cc1"><strong>تحريك للأعلى / للأسفل:</strong> لتغيير ترتيب التمارين في الجلسة.</p><p data-i18n="s4cc2"><strong>إظهار/إخفاء الملاحظات:</strong> لإضافة ملاحظة خاصة بهذا التمرين تحديداً.</p><p data-i18n="s4cc3"><strong>تبديل وزن الجسم:</strong> لتمارين وزن الجسم (مثل العقلة) — يخفي عمود الوزن ويظهر شارة <span class="badge badge-bw">BW</span>.</p><p style="margin-bottom:0" data-i18n="s4cc4"><strong>حذف التمرين:</strong> لإزالة التمرين من الجلسة.</p></div>
         </div>
-        <div class="subsection"><h3>&#9989; <span data-i18n="s4h5">إنهاء التمرين</span></h3>
+        <div class="subsection"><h3><span data-i18n="s4h5">إنهاء التمرين</span></h3>
             <ol class="steps">
                 <li data-i18n="s4fs1">بعد ما تنتهي من كل المجموعات، اضغط زر <strong>"إنهاء"</strong> في أعلى الشاشة</li>
                 <li data-i18n="s4fs2">ستظهر رسالة تأكيد: "إنهاء التمرين؟"</li>
                 <li data-i18n="s4fs3">اضغط <strong>"إنهاء"</strong> للتأكيد</li>
                 <li data-i18n="s4fs4">يظهر شعار نجاح ذهبي مع رسالة "تم إنهاء التمرين!" ثم تعود للشاشة الرئيسية</li>
             </ol>
-            <div class="info-card tip"><div class="card-label">&#128161; <span data-i18n="tipLabel">نصيحة</span></div><p data-i18n="s4ftip">إذا اضطررت للخروج قبل الإنهاء، لا تقلق — التطبيق يحفظ كل شيء تلقائياً ويمكنك الرجوع والمتابعة من زر "متابعة التمرين" في شاشة اليوم.</p></div>
+            <div class="info-card tip"><div class="card-label"><i data-lucide="lightbulb" class="card-icon"></i> <span data-i18n="tipLabel">نصيحة</span></div><p data-i18n="s4ftip">إذا اضطررت للخروج قبل الإنهاء، لا تقلق — التطبيق يحفظ كل شيء تلقائياً ويمكنك الرجوع والمتابعة من زر "متابعة التمرين" في شاشة اليوم.</p></div>
         </div>
     </section>
 
     <section class="section" id="sets-detail">
-        <div class="section-header"><span class="section-icon">&#127993;</span><h2 data-i18n="s5Title">المجموعات وأنواعها</h2></div>
+        <div class="section-header"><i data-lucide="layers" class="section-icon"></i><h2 data-i18n="s5Title">المجموعات وأنواعها</h2></div>
         <p data-i18n="s5Desc">التطبيق يدعم أربعة أنواع من المجموعات، كل نوع له لون مميز يساعدك على التفريق بينها بسرعة:</p>
         <div class="feature-grid">
             <div class="feature-item"><span class="badge badge-working" style="font-size:16px;">W - Working</span><h4 style="margin-top:12px;" data-i18n="st1t">مجموعة عمل</h4><p data-i18n="st1d">النوع الافتراضي — مجموعاتك الأساسية بالوزن الكامل</p></div>
@@ -213,9 +240,9 @@
     </section>
 
     <section class="section" id="previous-ref">
-        <div class="section-header"><span class="section-icon">&#128218;</span><h2 data-i18n="s6Title">أرقام الجلسة السابقة</h2></div>
+        <div class="section-header"><i data-lucide="history" class="section-icon"></i><h2 data-i18n="s6Title">أرقام الجلسة السابقة</h2></div>
         <p data-i18n="s6Desc">هذه هي الميزة الجوهرية في التطبيق — ميزة <strong>التحميل التدريجي (Progressive Overload)</strong>.</p>
-        <div class="info-card important"><div class="card-label">&#11088; <span data-i18n="keyLabel">ميزة أساسية</span></div><p data-i18n="s6imp">في كل مرة تؤدي تمريناً، يبحث التطبيق تلقائياً عن آخر مرة أديت فيها نفس التمرين ويعرض أرقامها في مربع أزرق فاتح فوق المجموعات الحالية.</p></div>
+        <div class="info-card important"><div class="card-label"><i data-lucide="star" class="card-icon"></i> <span data-i18n="keyLabel">ميزة أساسية</span></div><p data-i18n="s6imp">في كل مرة تؤدي تمريناً، يبحث التطبيق تلقائياً عن آخر مرة أديت فيها نفس التمرين ويعرض أرقامها في مربع أزرق فاتح فوق المجموعات الحالية.</p></div>
         <p data-i18n="s6p2">المربع يحمل عنوان <strong>"السابق"</strong> ويعرض كل مجموعة من الجلسة السابقة بهذا الشكل:</p>
         <div class="info-card" style="background:rgba(107,184,255,0.08);border-color:rgba(107,184,255,0.2);">
             <p style="color:var(--blue);font-weight:600;margin-bottom:8px;" data-i18n="prevLabel">السابق</p>
@@ -227,13 +254,14 @@
     </section>
 
     <section class="section" id="pr">
-        <div class="section-header"><span class="section-icon">&#127942;</span><h2 data-i18n="s7Title">الأرقام القياسية (PR)</h2></div>
-        <p data-i18n="s7Desc">التطبيق يتتبع أرقامك القياسية تلقائياً لكل تمرين. عندما ترفع وزناً يساوي أو يتجاوز أعلى وزن سبق أن رفعته في هذا التمرين، تظهر شارة ذهبية <span class="badge badge-pr">&#127942; PR</span> بجانب المجموعة.</p>
-        <div class="info-card"><p data-i18n="s7c1"><strong>&#127942; في شاشة التمرين:</strong> شارة ذهبية صغيرة تظهر بجانب المجموعة التي حققت فيها رقماً قياسياً جديداً.</p><p style="margin-bottom:0" data-i18n="s7c2"><strong>&#128200; في التحليلات:</strong> خط متقطع أفقي على رسم تطوّر الوزن يشير لأعلى وزن. النقاط الذهبية على الرسم تشير للجلسات التي حققت فيها الرقم القياسي.</p></div>
+        <div class="section-header"><i data-lucide="trophy" class="section-icon"></i><h2 data-i18n="s7Title">الأرقام القياسية (PR)</h2></div>
+        <p data-i18n="s7Desc">التطبيق يتتبع أرقامك القياسية تلقائياً لكل تمرين. عندما ترفع وزناً يساوي أو يتجاوز أعلى وزن سبق أن رفعته في هذا التمرين، تظهر شارة ذهبية <span class="badge badge-pr">PR</span> بجانب المجموعة.</p>
+        <div class="screenshot-wrap"><img loading="lazy" src="screenshots/workout-pr.png" alt="Personal Record"><p class="caption" data-i18n="capPR">شارة الرقم القياسي (PR) أثناء التمرين</p></div>
+        <div class="info-card"><p data-i18n="s7c1"><strong>في شاشة التمرين:</strong> شارة ذهبية صغيرة تظهر بجانب المجموعة التي حققت فيها رقماً قياسياً جديداً.</p><p style="margin-bottom:0" data-i18n="s7c2"><strong>في التحليلات:</strong> خط متقطع أفقي على رسم تطوّر الوزن يشير لأعلى وزن. النقاط الذهبية على الرسم تشير للجلسات التي حققت فيها الرقم القياسي.</p></div>
     </section>
 
     <section class="section" id="exercise-groups">
-        <div class="section-header"><span class="section-icon">&#128193;</span><h2 data-i18n="s8Title">مجموعات التمارين</h2></div>
+        <div class="section-header"><i data-lucide="folder-open" class="section-icon"></i><h2 data-i18n="s8Title">مجموعات التمارين</h2></div>
         <p data-i18n="s8Desc">يمكنك تنظيم التمارين في مجموعات — مفيدة جداً للسوبر سيت أو لتجميع تمارين عضلة واحدة معاً.</p>
         <p><strong data-i18n="s8l">إنشاء مجموعة تمارين في القالب:</strong></p>
         <ol class="steps">
@@ -246,32 +274,32 @@
     </section>
 
     <section class="section" id="export-import">
-        <div class="section-header"><span class="section-icon">&#128228;</span><h2 data-i18n="s9Title">التصدير والاستيراد</h2></div>
-        <div class="subsection"><h3>&#128228; <span data-i18n="s9h1">تصدير البيانات</span></h3>
+        <div class="section-header"><i data-lucide="arrow-left-right" class="section-icon"></i><h2 data-i18n="s9Title">التصدير والاستيراد</h2></div>
+        <div class="subsection"><h3><span data-i18n="s9h1">تصدير البيانات</span></h3>
             <p data-i18n="s9p1">ثلاث طرق لتصدير بياناتك متوفرة من الإعدادات:</p>
-            <div class="info-card"><p data-i18n="s9c1"><strong>&#128196; ملف CSV:</strong> جدول بيانات يمكن فتحه في Excel أو Google Sheets. مفيد للتحليل المتقدم.</p><p data-i18n="s9c2"><strong>&#128462; ملف PDF:</strong> تقرير مهيأ للطباعة بتصميم احترافي. مفيد لمشاركة سجلك مع المدرب.</p><p style="margin-bottom:0" data-i18n="s9c3"><strong>&#128190; نسخة احتياطية .liftlog:</strong> نسخة كاملة من كل بياناتك. مفيدة للنقل إلى جهاز جديد أو كتأمين لبياناتك.</p></div>
+            <div class="info-card"><p data-i18n="s9c1"><strong>ملف CSV:</strong> جدول بيانات يمكن فتحه في Excel أو Google Sheets. مفيد للتحليل المتقدم.</p><p data-i18n="s9c2"><strong>ملف PDF:</strong> تقرير مهيأ للطباعة بتصميم احترافي. مفيد لمشاركة سجلك مع المدرب.</p><p style="margin-bottom:0" data-i18n="s9c3"><strong>نسخة احتياطية .liftlog:</strong> نسخة كاملة من كل بياناتك. مفيدة للنقل إلى جهاز جديد أو كتأمين لبياناتك.</p></div>
         </div>
-        <div class="subsection"><h3>&#128229; <span data-i18n="s9h2">استيراد البيانات</span></h3>
+        <div class="subsection"><h3><span data-i18n="s9h2">استيراد البيانات</span></h3>
             <p data-i18n="s9p2">يمكنك استيراد البيانات من مصدرين:</p>
-            <div class="info-card"><p data-i18n="s9c4"><strong>&#128196; استيراد من CSV:</strong> اختر ملف CSV من جهازك. ستظهر شاشة معاينة تعرض ملخصاً للبيانات قبل الاستيراد، مع خيار للتحكم بالتعامل مع التكرارات (تخطي / استبدال / استيراد الكل).</p><p style="margin-bottom:0" data-i18n="s9c5"><strong>&#128190; استعادة من نسخة احتياطية:</strong> اختر ملف .liftlog لاستعادة كل بياناتك بالكامل.</p></div>
+            <div class="info-card"><p data-i18n="s9c4"><strong>استيراد من CSV:</strong> اختر ملف CSV من جهازك. ستظهر شاشة معاينة تعرض ملخصاً للبيانات قبل الاستيراد، مع خيار للتحكم بالتعامل مع التكرارات (تخطي / استبدال / استيراد الكل).</p><p style="margin-bottom:0" data-i18n="s9c5"><strong>استعادة من نسخة احتياطية:</strong> اختر ملف .liftlog لاستعادة كل بياناتك بالكامل.</p></div>
         </div>
     </section>
 
     <section class="section" id="scenarios">
-        <div class="section-header"><span class="section-icon">&#127939;</span><h2 data-i18n="s10Title">سيناريوهات الاستخدام</h2></div>
-        <div class="subsection"><h3>&#128170; <span data-i18n="sc1h">السيناريو الأول: أول يوم تمرين</span></h3>
+        <div class="section-header"><i data-lucide="route" class="section-icon"></i><h2 data-i18n="s10Title">سيناريوهات الاستخدام</h2></div>
+        <div class="subsection"><h3><span data-i18n="sc1h">السيناريو الأول: أول يوم تمرين</span></h3>
             <p data-i18n="sc1p">وصلت الجيم وجاهز تسجّل تمرينك لأول مرة باستخدام التطبيق:</p>
             <ol class="steps">
                 <li data-i18n="sc1s1">افتح التطبيق واضغط <strong>"بدء التمرين"</strong> من شاشة اليوم</li>
                 <li data-i18n="sc1s2">اختر <strong>"تمرين فارغ"</strong> بما إنك ما أنشأت قوالب بعد</li>
                 <li data-i18n="sc1s3">اضغط <strong>"+ إضافة تمرين"</strong> واكتب اسم أول تمرين (مثلاً: "بنش بريس")</li>
-                <li data-i18n="sc1s4">سجّل الوزن والتكرارات لكل مجموعة واضغط الدائرة &#9989; بعد كل مجموعة</li>
+                <li data-i18n="sc1s4">سجّل الوزن والتكرارات لكل مجموعة واضغط الدائرة بعد كل مجموعة</li>
                 <li data-i18n="sc1s5">كرر الخطوة 3 و 4 لكل تمرين في جلستك</li>
                 <li data-i18n="sc1s6">بعد الانتهاء، اضغط <strong>"إنهاء"</strong></li>
             </ol>
-            <div class="info-card tip"><div class="card-label">&#128161; <span data-i18n="tipLabel">نصيحة</span></div><p data-i18n="sc1tip">بعد أول تمرين، اذهب للسجل واضغط على الجلسة ثم اختر "حفظ كقالب" — بكذا ما تحتاج تكتب أسماء التمارين مرة ثانية.</p></div>
+            <div class="info-card tip"><div class="card-label"><i data-lucide="lightbulb" class="card-icon"></i> <span data-i18n="tipLabel">نصيحة</span></div><p data-i18n="sc1tip">بعد أول تمرين، اذهب للسجل واضغط على الجلسة ثم اختر "حفظ كقالب" — بكذا ما تحتاج تكتب أسماء التمارين مرة ثانية.</p></div>
         </div>
-        <div class="subsection"><h3>&#128197; <span data-i18n="sc2h">السيناريو الثاني: إعداد الجدول الأسبوعي</span></h3>
+        <div class="subsection"><h3><span data-i18n="sc2h">السيناريو الثاني: إعداد الجدول الأسبوعي</span></h3>
             <p data-i18n="sc2p">عندك برنامج تدريبي وتبي تجهّز قوالب لكل يوم:</p>
             <ol class="steps">
                 <li data-i18n="sc2s1">اذهب إلى تبويب <strong>"القوالب"</strong></li>
@@ -283,7 +311,7 @@
             </ol>
             <p data-i18n="sc2p2">الآن كل يوم تفتح التطبيق، يعرف أي قالب المفترض تستخدمه ويعرضه لك تلقائياً.</p>
         </div>
-        <div class="subsection"><h3>&#128200; <span data-i18n="sc3h">السيناريو الثالث: متابعة التقدّم</span></h3>
+        <div class="subsection"><h3><span data-i18n="sc3h">السيناريو الثالث: متابعة التقدّم</span></h3>
             <p data-i18n="sc3p">بعد شهر من التدريب المنتظم، تبي تشوف هل تحسّنت:</p>
             <ol class="steps">
                 <li data-i18n="sc3s1">اذهب إلى تبويب <strong>"التحليلات"</strong></li>
@@ -293,7 +321,7 @@
                 <li data-i18n="sc3s5">تحقق من الحجم الكلي والتكرارات أيضاً</li>
             </ol>
         </div>
-        <div class="subsection"><h3>&#128190; <span data-i18n="sc4h">السيناريو الرابع: النسخ الاحتياطي قبل تغيير الجهاز</span></h3>
+        <div class="subsection"><h3><span data-i18n="sc4h">السيناريو الرابع: النسخ الاحتياطي قبل تغيير الجهاز</span></h3>
             <p data-i18n="sc4p">عندك جهاز جديد وتبي تنقل بياناتك:</p>
             <ol class="steps">
                 <li data-i18n="sc4s1">من <strong>الإعدادات</strong>، اضغط <strong>"تصدير نسخة احتياطية كاملة"</strong></li>
@@ -302,23 +330,23 @@
                 <li data-i18n="sc4s4">اضغط <strong>"استعادة من نسخة احتياطية"</strong> واختر الملف</li>
                 <li data-i18n="sc4s5">تأكد من البيانات في شاشة المعاينة ثم أكّد الاستيراد</li>
             </ol>
-            <div class="info-card tip"><div class="card-label">&#128161; <span data-i18n="tipLabel">نصيحة</span></div><p data-i18n="sc4tip">إذا كنت تستخدم iCloud، بياناتك تتزامن تلقائياً بين أجهزتك بدون الحاجة لتصدير يدوي.</p></div>
+            <div class="info-card tip"><div class="card-label"><i data-lucide="lightbulb" class="card-icon"></i> <span data-i18n="tipLabel">نصيحة</span></div><p data-i18n="sc4tip">إذا كنت تستخدم iCloud، بياناتك تتزامن تلقائياً بين أجهزتك بدون الحاجة لتصدير يدوي.</p></div>
         </div>
     </section>
 
     <section class="section" id="tips">
-        <div class="section-header"><span class="section-icon">&#128161;</span><h2 data-i18n="s11Title">نصائح للمبتدئين</h2></div>
-        <div class="info-card tip"><div class="card-label">&#128161; <span data-i18n="tip1l">أنشئ القوالب أولاً</span></div><p data-i18n="tip1t">قبل ما تبدأ أسبوعك التدريبي، خصص 5 دقائق لإنشاء قوالب لكل يوم تدريب. هذا يوفر عليك وقت كبير كل يوم.</p></div>
-        <div class="info-card tip"><div class="card-label">&#128161; <span data-i18n="tip2l">سجّل المجموعة فوراً</span></div><p data-i18n="tip2t">سجّل كل مجموعة فور انتهائك منها — لا تنتظر نهاية التمرين. بكذا تضمن دقة الأرقام وما تنسى شيء.</p></div>
-        <div class="info-card tip"><div class="card-label">&#128161; <span data-i18n="tip3l">استخدم أرقام المرة السابقة</span></div><p data-i18n="tip3t">المربع الأزرق اللي يعرض أرقام المرة السابقة هو أهم أداة عندك. حاول دائماً إنك ترفع أكثر ولو بمقدار 2.5 كجم أو تكرار واحد زيادة.</p></div>
-        <div class="info-card tip"><div class="card-label">&#128161; <span data-i18n="tip4l">استخدم أنواع المجموعات</span></div><p data-i18n="tip4t">لا تنسى تصنّف مجموعاتك (إحماء، عمل، دروب سيت، فشل عضلي). هذا يعطيك صورة أوضح عن تمرينك في السجل والتحليلات.</p></div>
-        <div class="info-card tip"><div class="card-label">&#128161; <span data-i18n="tip5l">راجع تحليلاتك أسبوعياً</span></div><p data-i18n="tip5t">خصص 5 دقائق في نهاية كل أسبوع لمراجعة تبويب التحليلات. تتبّع تمرين أو اثنين مهمين عندك وتأكد إن الخط صاعد.</p></div>
-        <div class="info-card tip"><div class="card-label">&#128161; <span data-i18n="tip6l">احتفظ بنسخة احتياطية</span></div><p data-i18n="tip6t">كل شهر أو شهرين، صدّر نسخة احتياطية .liftlog من الإعدادات واحفظها في مكان آمن. بياناتك التدريبية ثمينة ولا تقدر بثمن.</p></div>
-        <div class="info-card tip"><div class="card-label">&#128161; <span data-i18n="tip7l">استخدم الملاحظات</span></div><p data-i18n="tip7t">إذا حسيت بألم أو غيّرت تقنية التمرين أو كان عندك ملاحظة مهمة، استخدم حقل الملاحظات. هذه المعلومات تكون قيّمة جداً لما ترجع لها لاحقاً.</p></div>
+        <div class="section-header"><i data-lucide="lightbulb" class="section-icon"></i><h2 data-i18n="s11Title">نصائح للمبتدئين</h2></div>
+        <div class="info-card tip"><div class="card-label"><span data-i18n="tip1l">أنشئ القوالب أولاً</span></div><p data-i18n="tip1t">قبل ما تبدأ أسبوعك التدريبي، خصص 5 دقائق لإنشاء قوالب لكل يوم تدريب. هذا يوفر عليك وقت كبير كل يوم.</p></div>
+        <div class="info-card tip"><div class="card-label"><span data-i18n="tip2l">سجّل المجموعة فوراً</span></div><p data-i18n="tip2t">سجّل كل مجموعة فور انتهائك منها — لا تنتظر نهاية التمرين. بكذا تضمن دقة الأرقام وما تنسى شيء.</p></div>
+        <div class="info-card tip"><div class="card-label"><span data-i18n="tip3l">استخدم أرقام المرة السابقة</span></div><p data-i18n="tip3t">المربع الأزرق اللي يعرض أرقام المرة السابقة هو أهم أداة عندك. حاول دائماً إنك ترفع أكثر ولو بمقدار 2.5 كجم أو تكرار واحد زيادة.</p></div>
+        <div class="info-card tip"><div class="card-label"><span data-i18n="tip4l">استخدم أنواع المجموعات</span></div><p data-i18n="tip4t">لا تنسى تصنّف مجموعاتك (إحماء، عمل، دروب سيت، فشل عضلي). هذا يعطيك صورة أوضح عن تمرينك في السجل والتحليلات.</p></div>
+        <div class="info-card tip"><div class="card-label"><span data-i18n="tip5l">راجع تحليلاتك أسبوعياً</span></div><p data-i18n="tip5t">خصص 5 دقائق في نهاية كل أسبوع لمراجعة تبويب التحليلات. تتبّع تمرين أو اثنين مهمين عندك وتأكد إن الخط صاعد.</p></div>
+        <div class="info-card tip"><div class="card-label"><span data-i18n="tip6l">احتفظ بنسخة احتياطية</span></div><p data-i18n="tip6t">كل شهر أو شهرين، صدّر نسخة احتياطية .liftlog من الإعدادات واحفظها في مكان آمن. بياناتك التدريبية ثمينة ولا تقدر بثمن.</p></div>
+        <div class="info-card tip"><div class="card-label"><span data-i18n="tip7l">استخدم الملاحظات</span></div><p data-i18n="tip7t">إذا حسيت بألم أو غيّرت تقنية التمرين أو كان عندك ملاحظة مهمة، استخدم حقل الملاحظات. هذه المعلومات تكون قيّمة جداً لما ترجع لها لاحقاً.</p></div>
     </section>
 
     <section class="section" id="faq">
-        <div class="section-header"><span class="section-icon">&#10067;</span><h2 data-i18n="s12Title">الأسئلة الشائعة</h2></div>
+        <div class="section-header"><i data-lucide="help-circle" class="section-icon"></i><h2 data-i18n="s12Title">الأسئلة الشائعة</h2></div>
         <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span data-i18n="fq1">هل أحتاج إنترنت لاستخدام التطبيق؟</span><span class="arrow">&#9660;</span></button><div class="faq-answer"><div class="faq-answer-inner" data-i18n="fa1">لا. التطبيق يعمل بالكامل بدون إنترنت. كل بياناتك مخزنة محلياً على جهازك. الإنترنت مطلوب فقط لمزامنة iCloud إذا كنت تستخدمها بين أجهزة متعددة.</div></div></div>
         <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span data-i18n="fq2">إذا طفيت التطبيق أثناء التمرين، هل أفقد بياناتي؟</span><span class="arrow">&#9660;</span></button><div class="faq-answer"><div class="faq-answer-inner" data-i18n="fa2">لا تقلق على الإطلاق. التطبيق يحفظ كل تغيير تلقائياً لحظة بلحظة. إذا أغلقت التطبيق أو انقطعت البطارية، فقط افتح التطبيق مرة ثانية واضغط "متابعة التمرين" من شاشة اليوم.</div></div></div>
         <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span data-i18n="fq3">كيف أعرف إني تحسّنت؟</span><span class="arrow">&#9660;</span></button><div class="faq-answer"><div class="faq-answer-inner" data-i18n="fa3">طريقتين: الأولى هي المربع الأزرق في شاشة التمرين اللي يعرض أرقام المرة السابقة — قارن أرقامك الحالية فيها. الثانية هي تبويب التحليلات — اختر أي تمرين وشاهد الرسم البياني، إذا الخط صاعد يعني أنت تتحسّن.</div></div></div>
@@ -341,9 +369,16 @@
 </main>
 </div>
 
-<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#9650;</button>
+<div class="progress-circle" id="progressCircle" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg viewBox="0 0 48 48">
+        <circle class="progress-bg" cx="24" cy="24" r="20"></circle>
+        <circle class="progress-fill" id="progressFill" cx="24" cy="24" r="20"></circle>
+    </svg>
+    <span class="progress-text" id="progressText">0%</span>
+</div>
 
 <script src="translations.js"></script>
+<script>document.addEventListener("DOMContentLoaded", () => lucide.createIcons());</script>
 <script src="script.js"></script>
 
 </body>
